@@ -25,6 +25,7 @@ SECRET_KEY = '+#(u-^@1g*t(y8u4&t7i^d-7odonymvcsv&#rpwno842lixkda'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = ['127.0.0.1','192.168.2.231']
 
 
@@ -78,17 +79,18 @@ WSGI_APPLICATION = 'timsleb.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'timsleb',
-        'USER': 'postgres',
-        'PASSWORD': 'timsleadmin',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'timsleb',
+#        'USER': 'postgres',
+#        'PASSWORD': 'timsleadmin',
+#        'HOST': '127.0.0.1',
+#        'PORT': '5432',
+#    }
+#}
 
+DATABASES = {postgres://uheevssuwxvefl:33648d4bf8c96f3817eb5b3a486df711b2a3634f0fe99fc75a558c964158624c@ec2-54-235-177-45.compute-1.amazonaws.com:5432/dbd5hf6qkau82e}
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
