@@ -1,0 +1,41 @@
+
+<!--
+{{ project.creator }} <br />
+{{ project.slug }} <br />
+<h1>{{ project.name }}</h1> <br />
+{{ project.tagline }} <br />
+{{ project.description }} <br />
+{{ project.type_of_circle }}
+{{ project.project.circle.name }} <br />
+{{ project.project.name }} <br />
+<br />
+{{project.style}}
+-->
+
+
+<a href={% url 'project_read' circle_slug=project.circle.slug project_id=project.id %}>
+<div style="
+	padding-top: 60px;
+	padding-bottom: 60px; 
+	color: {{project.style.color_light}};
+	background-color: {{project.style.color_dark}};
+	" class="card">
+	<div class="row">
+	<div class="col-md-10 col-md-offset-1">
+
+<div class="col-md-5">
+{% if project.name %}<h2><b>{{ project.name }}</b></h2>{% endif %}
+
+</div>
+
+<div class="col-md-6 col-md-offset-1">
+{% if project.tagline %}<h4>{{ project.tagline }}</h4>{% endif %}
+{% if project.description %}{{ project.description }}<br />{% endif %}
+</div>
+
+<br />
+<br />
+</div>
+</div>
+</div>
+</a>

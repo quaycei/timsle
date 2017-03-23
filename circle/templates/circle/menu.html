@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load circletags %}
+{% load pacttags %}
+
+{% block content %}
+
+
+<script>
+
+var body = document.getElementById('body')
+var scrollable = document.getElementById('scrollable')
+
+
+	body.ontouchmove = function(event){
+		event.preventDefault();
+	}
+
+
+
+</script>
+
+
+<style>
+	.back-menu {display: none;}
+	.spacer-basehtml { display: none; }
+	.spacer-basehtml-sm { display: none; }
+</style>
+
+
+
+
+
+
+
+
+{% if user.is_authenticated %}
+{% for pact in buddy_pacts %}
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="modal fade" id="modal-{{pact.id}}284195" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<br /><br /><br />
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Confirm this checkin:
+							</h4>
+						</div>
+						<div class="modal-footer">
+
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button> 
+							<a href="{% url 'pact_checkin' pact_id=pact.id %}" class="btn btn-success"><b>Confirm</b></a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+{% endfor %}
+{% endif %}
+
+
+{% if messages %}
+
+
+{% for message in messages %}
+<div class="animated zoomOut center " style="animation-delay: 1.3s; margin-top: 150px; position: fixed;">
+	<div class="animated zoomIn">
+		<i class="col-white material-icons fa-spin center" style="font-size: 8em;">bubble_chart</i>
+		<h3 class="col-white ">{{message}}</h3></div>
+	</div>
+</div>
+{% endfor %}
+
+
+{% else %}
+
+<div class="animated zoomOut center " style="animation-delay: 1.3s; margin-top: 150px; position: fixed;">
+	<div class="animated zoomIn">
+		<i class="col-white material-icons fa-spin center" style="font-size: 8em;">bubble_chart</i>
+		<h3 class="col-white ">Loading</h3></div>
+	</div>
+</div>
+{% endif %}
+
+
+<div class="container-fluid">
+	<div class="row">
+
+		<div class="main-carousel " data-flickity='{ "cellAlign": "left", "dragThreshold": 30}'>
+
+
+
+
+			{% if user.is_authenticated %}
+			{% for pact in my_pacts %}
+
+			<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3" style="max-width: 400px;">
+
+				<div class="carousel-cell--my-pact animated zoomIn" id="scrollable" style="animation-delay: 1.{{ forloop.counter }}s;">
+
+					{% my_pact_panel pact_id=pact.id%}
+
+				</div>
+
+			</div>
+			{% endfor %}
+
+
+			{% endif %}
+
+			{% if user.is_authenticated %}
+			{% for pact in buddy_pacts %}
+			<div class="col-xs-12 col-sm-5 col-md-4 col-lg-3" style="max-width: 400px;">
+				<div class="carousel-cell--my-pact animated zoomIn" id="scrollable" style="animation-delay: 1.{{ forloop.counter }}s;">
+
+					{% buddy_pact_panel pact_id=pact.id%}
+
+				</div>
+
+			</div>
+			{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+
+{% endblock %}
+

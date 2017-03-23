@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+<div class="animated zoomIn shadow" style="animation-delay: 0.2s">
+<div class="bg-white card">
+	<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="padding-y-80">
+{% if circle.organization %}
+<h4 class="txt-caps">
+<a href="{% url 'organization_read' organization_slug=circle.organization.slug %}">
+{{ circle.organization }}
+</a>
+</h4>
+{% endif %}
+{% if circle.name %}<h1><b>{{ circle.name }}</b></h1>{% endif %}
+{% if circle.tagline %}<h4>{{ circle.tagline }}</h4><br />{% endif %}
+
+{% if circle.description %}{{ circle.description }}{% endif %}<br />
+
+<br />
+<br />
+<br />
+{% for project in projects %}
+{% project_slip circle_slug=project.circle.slug project_id=project.id%}
+
+<br />
+{% empty%}
+{{ circle.name }} has no projects online at this time.
+{% endfor %}
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+

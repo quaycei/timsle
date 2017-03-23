@@ -1,0 +1,62 @@
+
+
+
+<a class="panel-title a-dec-none button button--show" data-toggle="collapse" data-parent="#panel-734121" href="#panel-element-{{group.id}}">
+	<div class="panel panel-groups" style="border-radius: 0;">
+	<div class="padding-20">
+		<div class="panel-heading">
+			<b class="uppercase" style="color: white;">{% if group.name %}{{group.name}}{% endif %}</b><br />{{ group.tagline }}
+		</div>
+		</div>
+	</a>
+	<div id="panel-element-{{group.id}}" class="panel-collapse collapse">
+		<div class="panel-body" style="background-color: rgba(0,0,0,0.8); z-index: 100;">
+
+
+{% for project in projects %}
+<div class="col-sm-5 col-md-4 animated zoomIn" style="padding: 2px;">
+<a href="{% url 'project_read' circle_slug=project.circle.slug project_id=project.id %}">
+	<div class="cell-style" style="
+	background-color: {{project.style.color_dark}};
+	color: {{project.style.color_light}}; animation-delay: 0.{{forloop.counter}}s">
+<div class="box ">
+{% if project.circle.name %}<b>{{project.circle.name}}</b>{% endif %}
+<h4><b>{{ project.name }}</b></h4>
+</div>
+</div>
+</a>
+</div>
+{% empty %}
+<div class="box-empty animated zoomIn">
+<div class="center">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br />
+There are no Projects here yet.
+</div>
+</div>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+

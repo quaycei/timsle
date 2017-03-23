@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{%block content%}
+
+
+{{buddy.pact.owner.username}}<br />
+{{ buddy.pact.answer }}<br />
+<hr>
+<form action="{% url 'buddy_status' buddy.id %}" method="post">
+{% csrf_token %}
+{% render_field form.status class+="form-text-create"%}
+<input type="submit" value="Respond" class="uppercase form-text-submit bg-brand"/>
+</form>
+  
+
+
+
+{% endblock %}

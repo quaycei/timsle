@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{%block content%}
+
+
+
+{{pact.answer}}
+
+<form action="{% url 'buddy_create' pact.id %}" method="post">
+{% csrf_token %}
+
+{% render_field buddyform.email class+="form-text-pact" placeholder="Enter your buddys email address"%}
+<input type="submit" value="Add your buddy" class="btn btn-lg bg-brand white txt-bold inline" />
+								
+
+</form>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+
+<div class="animated zoomIn shadow" style="animation-delay: 0.2s">
+<div class="card-top" style="background-color: white;">
+	<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="padding-y-50">
+
+{% if project.name %}<h1 style="animation-delay: 0.8s"><b>{{ project.name }}</b></h1>{% endif %}
+
+{% if project.tagline %}<h3>{{ project.tagline }}</h3>{% endif %}
+{% if project.description %}<h4>{{ project.description }}</h4>{% endif %}
+<br />
+<h5 class="txt-caps animated fadeIn"><b>Commit to a challenge below:</b></h5>
+
+
+</div></div></div>
+
+{% for content in contents %}
+{% content_slip content_id=content.id %}
+{% empty%}
+	<div class="panel-body" style="background-color: rgba(0,0,0,0.8); z-index: 100;">
+<div class="box-empty animated zoomIn">
+<div class="center">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br />
+This project is currently empty.
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<div class="card-bottom" style="background-color: white;">
+	<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="padding-y-50">
+
+{% if project.circle.name %}<h4 class="txt-caps inline" ><b>
+<a href="{% url 'circle_read' circle_slug=project.circle.slug %}">{{ project.circle.name }}</a></b></h4>
+{% endif %} 
+{% if project.circle.organization %}
+<h4 class="txt-caps inline">
+&nbsp &nbsp <a href="{% url 'organization_read' organization_slug=project.circle.organization.slug %}"  ">
+{{ project.circle.organization }}
+</a>
+</h4><br />
+{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+{% endblock %}

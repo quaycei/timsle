@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load circletags %}
+{% block content %}
+
+<!--
+@verified_email_required
+def pact_list(request):
+    buddy_requests = Buddy.objects.filter(user=request.user).filter(status=1)
+    my_pacts = request.user.pact_set.all().filter(status=1)
+    buddy_pacts = Pact.objects.filter(id__in=buddy_queryset.values('pact_id')).filter(status=1)
+    buddy_pending = Buddy.objects.filter(status=1)
+    buddy_queryset = Buddy.objects.filter(user=request.user).filter(status=2)
+
+    return render(request, 'pact/list.html', {
+        'buddy_requests': buddy_requests,
+        'my_pacts':my_pacts,
+        'buddy_pacts':buddy_pacts,
+        })
+</p>
+-->
+
+<div class="animated zoomIn">
+
+<h3 class="col-white animated fadeInDown" style="animation-delay: 0.25s">Your Dashboard</h3>
+<br />
+<br />
+<div class="main-carousel " data-flickity='{ "cellAlign": "left", "contain": true }'>
+
+
+{% for pact in my_pacts %}
+<div class="col-xs-10 col-sm-8 col-md-3">
+<div class="carousel-cell height-250">
+<p class="col-white">Pact</p>
+</div>
+</div>
+{% endfor %}
+
+{% endblock %}
+

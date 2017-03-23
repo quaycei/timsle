@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+
+<div class="animated zoomIn">
+<div class="col-xs-12 col-md-10 col-md-offset-1">
+
+
+<h5 class="col-white txt-caps animated fadeIn">{% if group.name %}<b>{{group.name}}</b> is a{% endif %}  great choice{% if user.is_authenticated %}, {{user.username}}{% endif %} -</h5>
+<h3 class="col-white animated fadeInDown" style="animation-delay: 0.25s">Check out these projects to get started:</h3>
+
+
+<br /><br />
+
+
+
+
+	<div class="row">
+		<div class="col-md-12">
+			<div  id="panel-{{group.slug}}-124972">
+
+{% for project in projects %}
+				<div class="panel animated zoomInUp" style="background-color: rgba(255,255,255,0.1); color: white;animation-delay: 0.{{forloop.counter}}5s;">
+					<div class="panel-heading">
+						 <a data-toggle="collapse" data-parent="#panel-{{group.slug}}-124972" href="#panel-element-{{group.slug}}-{{project.id}}-471969">
+						 	<h4 class="col-white"> <b>{% if project.name %}{{project.name}}{% endif %}</b></h4>
+<p class="col-white">{% if project.tagline %}{{project.tagline }}{% endif %}</p>
+						 </a>
+					</div>
+					<div id="panel-element-{{group.slug}}-{{project.id}}-471969" class=" collapse">
+						<div class="btn-main-list">
+							<p class="col-white">{% if project.description %}{{project.description }}{% endif %}</p>
+							<a href="{% url 'project_read' circle_slug=project.circle.slug project_id=project.id %}" class="a-dec-none"><br />
+							
+<i class="material-icons col-white inline animated infinite pulse">play_circle_outline</i>
+<h4 class="col-white inline" style="position: relative;top:-4px;"><b>Check it out</b></h4>
+</a>
+						</div>
+					</div>
+				</div>
+{% empty %}
+<div class="box-empty animated zoomIn" style="animation-delay:0.8s">
+<div class="center padding-y-80">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br /><br />
+There are no Projects here yet.
+</div>
+</div>
+{% endfor %}
+			</div>
+		</div>
+	</div>
+
+</div>
+</a>
+
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+

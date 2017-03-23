@@ -1,0 +1,60 @@
+<script>
+
+var noScroll = document.getElementById('noScroll')
+
+	noScroll.ontouchmove = function(event){
+		event.preventDefault();
+	}
+
+
+
+</script>
+
+
+<div class="cell-top " id="noScroll">
+
+
+
+<div class="center ">
+<div style="
+    border-radius: 3px; height: 70px; margin-top:2px; margin-bottom: 18px;">
+<h1 class="col-white anon" style="line-height: 69px; font-size: 8em; font-weight: 700; ">{{pact.get_checkin_count}}
+</h1>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-12">
+<h5 class="col-white inline txt-caps" ><b>{{ pact.owner }}&nbsp </b> {{pact.content.project.group}}</h5>
+<h4 class="col-white">{{pact.answer }}</h4><br />
+</div>
+</div>
+
+</div>
+
+
+<div class="cell-bottom">
+<div class="shadow-down" style="width: 100%; height: 10px; opacity: 0.6; position: absolute; top:0;"></div>
+
+{% for checkin in checkins %}
+<div class="row row-recent {% cycle 'row1' 'row2' %}">
+<div class="col-xs-3 center ">
+<i class="material-icons col-green md-2em">done</i>
+</div>
+<div class="col-xs-9">
+<p class="col-black inline"><b>{{checkin.created_at}}</b><br />
+Checked in by {{ checkin.submitted_by }}</p><br /><br />
+</div>
+</div>
+{% empty %}
+<div class="box-empty animated zoomIn" style="animation-delay:0.8s; border-color:white; ">
+<div class="center  col-white">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br /><br />
+There are no check-ins yet.
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+
+

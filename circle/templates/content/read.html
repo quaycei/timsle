@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+
+<div class="animated zoomOut center " style="animation-delay: 1.3s; margin-top: 150px; position: fixed;">
+<div class="animated zoomIn">
+<i class="col-white material-icons fa-spin center" style="font-size: 8em;">bubble_chart</i>
+<h3 class="col-white">Working</h3>
+</div>
+</div>
+
+
+<div class="col-md-10 col-md-offset-1 animated fadeInDown" style="animation-delay: 1.2s;">
+<i class="material-icons col-white md-4em" style="opacity: 0.1; margin-top: -30px;">sentiment_very_satisfied</i><br />
+<h5 class="col-white txt-caps animated fadeIn">It's time to get started{% if user.is_authenticated %} {{user.username}}{% else %}{% endif %}!</h5>
+<h3 class="col-white animated fadeInDown"><b>{{content.question}}</b></h3>
+
+
+
+<br />
+
+<div class="input-group animated fadeInDown" style="animation-delay: 0.15s">
+      <input type="text" class="form-control challenge-answer" placeholder="Write your answer..." >
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"><i class="material-icons" style="font-size: 3em; padding: 3px; color: #46459A;">arrow_forward</i></button>
+      </span>
+    </div>
+
+
+<br />
+<br />
+<br />
+
+
+
+<div class="col-md-6">
+
+<h5 class="col-white txt-caps animated fadeIn">Check out these examples:</h5>
+<br />
+{% for guideline in guideline_examples %}
+				<div class="panel animated zoomInUp" style="animation-delay: 1.{{forloop.counter}}5s; background-color: rgba(255,255,255,0.1)">
+					<div class="panel-heading">
+					
+						 	<h4 class="col-white"> {% if guideline.text %}{{guideline.text}}{% endif %}</h4>
+
+						 
+					</div>
+</div>
+{% empty %}
+<div class="box-empty animated zoomIn" style="animation-delay:1.8s; margin-left:0;">
+<div class="center padding-y-50">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br /><br />
+There are no examples here yet.
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+<div class="col-md-6">
+
+<h5 class="col-white txt-caps animated fadeIn">There are the rules:</h5>
+<br />
+{% for guideline in guideline_rules %}
+				<div class="panel animated zoomInUp" style="animation-delay: 1.{{forloop.counter}}s; background-color: rgba(0,0,0,0.1)">
+					<div class="panel-heading">
+					
+						 	<h4 class="col-white"> {% if guideline.text %}{{guideline.text}}{% endif %}</h4>
+
+						 
+					</div>
+</div>
+{% empty %}
+<div class="box-empty animated zoomIn" style="animation-delay:1.8s; margin-left:0;">
+<div class="center padding-y-50">
+<i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br /><br />
+There are no rules here yet.
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
