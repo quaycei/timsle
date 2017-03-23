@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import dj_database_url      #heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -90,8 +91,15 @@ WSGI_APPLICATION = 'timsleb.wsgi.application'
 #    }
 #}
 
-DATABASES = {postgres://uheevssuwxvefl:33648d4bf8c96f3817eb5b3a486df711b2a3634f0fe99fc75a558c964158624c@ec2-54-235-177-45.compute-1.amazonaws.com:5432/dbd5hf6qkau82e}
 
+
+
+DATABASES =  {'default' : dj_database_url.config(
+                default='postgres://uheevssuwxvefl:33648d4bf8c96f3817eb5b3a486df711b2a3634f0fe99fc75a558c964158624c@ec2-54-235-177-45.compute-1.amazonaws.com:5432/dbd5hf6qkau82e')}
+
+
+# Enable Connection Pooling
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
