@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 
-from circle.models import Style, Group, Organization, Circle, Project, Content
+from circle.models import Circle, Project, Content
 
 
 register = template.Library()
@@ -19,13 +19,11 @@ def content_slip(content_id):
        
 
 @register.inclusion_tag('project/slip.html')
-def project_slip(circle_slug, project_id):
-    circle = Circle.objects.get(slug=circle_slug)
+def project_slip(project_id):
     project = Project.objects.get(id=project_id)
     contents = project.content_set.all()
 
     return {
-        'circle':circle,
         'project':project,
         'contents':contents,
         }

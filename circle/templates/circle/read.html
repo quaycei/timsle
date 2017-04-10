@@ -3,11 +3,52 @@
 
 {% block content %}
 
-<div class="animated zoomIn shadow" style="animation-delay: 0.2s">
-<div class="bg-white card">
-	<div class="row">
-	<div class="col-sm-10 col-sm-offset-1">
-		<div class="padding-y-80">
+<style>
+nav {display: none;}
+.gradient1, .gradient2 {background: {{circle.style.color_dark}};
+}
+
+
+</style>
+
+
+
+<div class="animated zoomIn">
+<div class="col-xs-12 col-md-10 col-md-offset-1">
+<h5 class="col-white txt-caps animated fadeIn">First, pick a general goal.</h5>
+<h3 class="col-white animated fadeInDown" style="animation-delay: 0.25s">Where would you like to start?</h3>
+
+
+<br /><br />
+
+
+{% for group in groups %}
+<a href="{% url 'project_list' group_slug=group.slug %}" class="a-dec-none col-xs-6 col-sm-4 col-md-3" >
+<div class="btn-main animated zoomInDown" style="animation-delay: 0.{{forloop.counter}}s">
+<i class="material-icons col-white md-4em">{% if group.icon.name %}{{group.icon.name}}{% endif %}</i><br />
+<p class="col-white"> {% if group.name%}{{group.name}}{% endif %}</p>
+</div>
+</a>
+{% endfor %}
+
+</div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
 {% if circle.organization %}
 <h4 class="txt-caps">
 <a href="{% url 'organization_read' organization_slug=circle.organization.slug %}">
@@ -15,7 +56,7 @@
 </a>
 </h4>
 {% endif %}
-{% if circle.name %}<h1><b>{{ circle.name }}</b></h1>{% endif %}
+{% if circle.name %}<h1>{{ circle.name }}</h1>{% endif %}
 {% if circle.tagline %}<h4>{{ circle.tagline }}</h4><br />{% endif %}
 
 {% if circle.description %}{{ circle.description }}{% endif %}<br />
@@ -36,5 +77,5 @@
 </div>
 </div>
 
-{% endblock %}
+
 

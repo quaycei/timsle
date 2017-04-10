@@ -3,9 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from allauth.account.models import EmailAddress
-from django.utils import timezone
 
-from circle.models import Style, Group, Organization, Circle, Project, Content, Guideline
+from circle.models import Circle, Project, Content, Guideline
 
 class Pact(models.Model):
     STATUS_CHOICES = (

@@ -2,74 +2,89 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import validate_slug
+from django.contrib.contenttypes.fields import GenericRelation
+from palette.models import Palette, Element
 
-class Style(models.Model):
-    creator = models.ForeignKey(User, default=None)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=30)
-    color_dark = models.CharField(max_length=7)
-    color_light = models.CharField(max_length=7)
-    accent_color_dark = models.CharField(max_length=7)
-    accent_color_light = models.CharField(max_length=7)
+STATUS = (
+        (0, 'Pending'),
+        (1, 'Online'),
+        (2, 'Offline'),
+        (3, 'Removed'),
+    )
 
-    def __str__(self):
-        return self.name
+VERIFICATION = (
+        (0, 'Pending'),
+        (1, 'Verified'),
+        (2, 'Flagged'),
+        (3, 'Declined'),
+    )
 
+RANK_TYPES = (
+        (0, 'Enterprise'),
+        (1, 'Station'),
+        (2, 'Probe'),
+        (3, 'Lander'),
+        (4, 'Mothership'),
 
-class Group(models.Model):
-    creator = models.ForeignKey(User, default=None)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=30)
-    tagline = models.CharField(max_length=140)
-    description = models.TextField(max_length=140)
-    style = models.ForeignKey(Style, default=None, blank=True)
-    slug = models.CharField(max_length=21, blank=False, unique=True, validators=[validate_slug])
+    )
 
-    def __str__(self):
-        return self.name
-
-class Organization(models.Model):
-    creator = models.ForeignKey(User, default=None)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=30)
-    tagline = models.CharField(max_length=140)
-    description = models.TextField(max_length=140)
-    style = models.ForeignKey(Style, default=None, blank=True)
-    group = models.ForeignKey(Group, default=None, blank=True)
-    slug = models.CharField(max_length=21, blank=False, unique=True, validators=[validate_slug])
+class Contact(models.Model):
+    contact_name = models.CharField(max_length=140, default=None, blank=True)
+    website = models.CharField(max_length=140, default=None, blank=True)
+    phone_number = models.CharField(max_length=140, default=None, blank=True)
+    email_address = models.CharField(max_length=140, default=None, blank=True)
+    contact_note = models.TextField(max_length=300, default=None, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.contact_name
+
 
 class Circle(models.Model):
+    rank = models.IntegerField(choices=RANK_TYPES,default=0)
+    verification = models.IntegerField(choices=VERIFICATION,default=0)
+    status = models.IntegerField(choices=STATUS,default=0)
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=30)
-    tagline = models.CharField(max_length=140)
-    description = models.TextField(max_length=140)
-    group = models.ForeignKey(Group, default=None, blank=True)
-    organization = models.ForeignKey(Organization, default=None, blank=True)
-    style = models.ForeignKey(Style, default=None, blank=True)
-    slug = models.CharField(max_length=21, blank=False, unique=True, validators=[validate_slug])
+    palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
+    parent = models.ForeignKey('self', null=True, blank=True, default=None)
+    slug = models.CharField(max_length=21, null=True, blank=True, unique=True, validators=[validate_slug])
+    name = models.CharField(max_length=50)
+    icon = models.ForeignKey(Element, null=True, blank=True, default=None)
+    contact = models.ForeignKey(Contact, null=True, blank=True, default=None)
+    tagline = models.CharField(max_length=140, default=None, blank=True)
+    description = models.TextField(max_length=140, default=None, blank=True)
+    directional_question = models.CharField(max_length=140, null=True, default="What would you like to do?", blank=True,)
+
 
     def __str__(self):
-        return self.name
+        return self.name 
+
 
 class Project(models.Model):
+    status = models.IntegerField(
+        choices=STATUS,
+        default=0,
+    )
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=30)
-    tagline = models.CharField(max_length=140)
-    description = models.TextField(max_length=140)
-    circle = models.ForeignKey(Circle, default=None)
-    group = models.ForeignKey(Group, default=None, blank=True)
-    style = models.ForeignKey(Style, default=None, blank=True)
+    palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
+    name = models.CharField(max_length=60)
+    icon = models.ForeignKey(Element, null=True, blank=True, default=None)
+    tagline = models.CharField(max_length=140, default=None, blank=True)
+    description = models.TextField(max_length=140, default=None, blank=True)
+    circle = models.ManyToManyField(Circle, default=None, blank=True)
+
+
 
     def __str__(self):
         return self.name
 
 
 class Content(models.Model):
+    status = models.IntegerField(
+        choices=STATUS,
+        default=0,
+    )
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     TYPE_OF_CONTENT_CHOICES = (
@@ -82,18 +97,25 @@ class Content(models.Model):
         choices=TYPE_OF_CONTENT_CHOICES,
         default=0,
     )
+    palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
     name = models.CharField(max_length=60)
-    tagline = models.CharField(max_length=140)
-    description = models.TextField(max_length=140)
+    icon = models.ForeignKey(Element, null=True, blank=True, default=None)
+    tagline = models.CharField(max_length=140, default=None, blank=False)
+    description = models.TextField(max_length=140, default=None, blank=False)
     question = models.TextField(max_length=140, default=None, blank=False)
     project = models.ForeignKey(Project, default=None, blank=False)
-    style = models.ForeignKey(Style, default=None, blank=True)
+
 
     def __str__(self):
         return self.name
 
 
 class Guideline(models.Model):
+    rank = models.IntegerField(choices=RANK_TYPES,default=3)
+    status = models.IntegerField(
+        choices=STATUS,
+        default=0,
+    )
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     TYPE_OF_GUIDELINE_CHOICES = (

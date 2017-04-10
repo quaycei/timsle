@@ -1,53 +1,14 @@
+<!-- CIRCLE/LIST -->
 {% extends 'base.html' %}
 {% load circletags %}
 {% block content %}
 
+{% if circle.rank == 0 %}
+{% include 'circle/Relay/Torus/list.html' %}
+{% elif circle.rank == 2 %}
+{% include 'circle/Relay/Lander/list.html' %}
+{% endif %}
 
 
-<div class="animated zoomIn " style="animation-delay: 0.2s">
-	
-		<div class="row ">
-
-			<div class="col-sm-10 col-sm-offset-1">
-				
-	<br />
-					<h3 class="col-white">What challenge would you like to start?</h3>
-					<br />
-				</div>
-			</div>
-
-			
-
-			
-
-							<div class="row">
-								<div class="col-xs-12">
-									<div class="panel-group" id="panel-734121">
-
-										{% for group in groups %}
-										{% group_panel group_slug=group.slug %}
-										{% empty%}
-										There are no categories online at this time.
-										{% endfor %}
-
-									</div>
-									</div>
-						
-						
-
-
-
-
-
-
-
-			
-				</div>
-				</div>
-			
-				
-				{% endblock %}
-
-
-
+		{% endblock %}
 

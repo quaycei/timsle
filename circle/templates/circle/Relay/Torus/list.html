@@ -1,0 +1,113 @@
+{% load circletags %}
+
+<div class="container-fluid" style="background-color: white;">
+	<div class="row">
+		<div class="col-sm-11 col-sm-offset-1">
+			<div class="col-sm-8 animated slideInLeft">
+				<br />
+				<br />	
+				<h1 style="font-weight: 500;">{{circle.tagline}}</h1>
+				{% if circle.description %}
+				<h2 style="font-weight: 300;">{{circle.description}}</h2>
+				{% endif %}
+				<div class="brick-underline"></div>
+				<br />
+				<br />
+			</div>
+			<div class="col-sm-3 col-sm-offset-1 animated fadeInRight" style="padding: 0; z-index: 0;">
+				<div class="row">
+					{% if circle.icon %}
+					<div class="header-icon-holder">
+						<div class="header-icon-circle animated zoomIn">
+							<i class="material-icons md-4em col-white;" style=" border: 10px dotted white; padding: 10px; border-radius: 50%">{{circle.icon.text}}</i>
+						</div>
+						{% endif %} </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	{% if child_circles %}
+	<div class="container-fluid" style="background-color: {{circle.palette.background_color}}; z-index: 1;">
+		<div class="row ">
+			<div class="container">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
+					<div class="question-holder">
+						<i class="fa fa-spin  col-white fa-circle-o-notch"></i>&nbsp
+						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white " style="font-weight: 300;">{{circle.directional_question}}</h3></h4>
+					</div>
+					<br />
+					<div class="row">
+						{% for circle in child_circles %}
+						<a href="{% url 'circle_list' circle_id=circle.id %}">
+							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.{{forloop.counter}}s;">
+
+								<div class="btn-top-navigation" style="color: white;">
+									<div class="clippy1">
+										<div class="inner-clip">
+											{% if circle.icon %}
+											<i class="material-icons md-4em col-white;" style="margin-top: 10px; border-radius: 50%; border: 8px dotted white; border-style: dashed dotted dotted dotted; padding: 20px;">{{circle.icon.text}}</i>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="btn-bottom-navigation">
+									<h4 class="col-black center">{{circle.name}}</h4>
+								</div>
+							</div>
+						</a>
+						{% empty%}
+						There are no circles here at this time.
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+
+	{% for project in projects %}
+	{% project_slip project_id=project.id %}
+	{% endfor %}
+	<div class="container-fluid">
+		<div class="row footer">
+			<div class="container">
+				<div class="col-xs-12 col-md-10 col-md-offset-1">
+					<div class="row">
+						<div class="col-sm-4">
+							{% if circle.name %}<h3><b>{{circle.name}}</b></h3><br />{% endif %}
+							{% if circle.contact %}
+							{% if circle.contact.contact_name %}<b>{{circle.contact.contact_name}}</b>{% endif %}
+							{% if circle.contact.phone_number %}<p>{{circle.contact.phone_number}}</p>{% endif %}
+							{% if circle.contact.email_address %}<p>{{circle.contact.email_address}}</p>{% endif %}
+							{% endif %}
+						</div>
+						<div class="col-sm-4">
+							{% for project in projects %}
+							{{project.name}}<br /><br />
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="padding-y-20" style="background-color: black">
+		<div class="container">
+			<div class="col-xs-12 col-md-10 col-md-offset-1">
+				<div class="col-sm-10">
+					<p style="color: rgba(255,255,255,0.3); font-weight: 500;"><b>© 2017. All rights reserved. Powered by Timsle.</b>
+						<br />
+						Timsle is designed to help us improve our health, reach our goals, and live better lives.</p>
+
+					</div>
+
+					<div class="btn btn-default" style="background-color: rgba(255,255,255,0.3); opacity: 0.3; float: right; margin-top: 8px;"><b>Explore Timsle</b></div>
+				</div>
+			</div>
+		</div>	
+	</div>
+

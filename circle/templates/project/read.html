@@ -4,18 +4,19 @@
 {% block content %}
 
 
-<div class="animated zoomIn shadow" style="animation-delay: 0.2s">
+
 <div class="card-top" style="background-color: white;">
 	<div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
 		<div class="padding-y-50">
+<i class="material-icons" style="display: inline;">arrow_back</i>
+
 
 {% if project.name %}<h1 style="animation-delay: 0.8s"><b>{{ project.name }}</b></h1>{% endif %}
 
 {% if project.tagline %}<h3>{{ project.tagline }}</h3>{% endif %}
 {% if project.description %}<h4>{{ project.description }}</h4>{% endif %}
 <br />
-<h5 class="txt-caps animated fadeIn"><b>Commit to a challenge below:</b></h5>
 
 
 </div></div></div>
@@ -53,6 +54,6 @@ This project is currently empty.
 		</div>
 	</div>
 </div>
-</div>
+
 
 {% endblock %}
