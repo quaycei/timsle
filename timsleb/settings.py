@@ -98,7 +98,7 @@ DATABASES =  {'default' : dj_database_url.config(
 
 
 # Enable Connection Pooling
-#DATABASES['default']['ENGINE'] = 'django_postgrespool'
+DATABASES['default']['ENGINE'] = 'django_postgrespool'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
