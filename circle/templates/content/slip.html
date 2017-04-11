@@ -14,7 +14,7 @@
 {% if content.type_of_circle == 1 %}
 <a href="{% url 'content_read' project_id=content.project.id content_id=content.id %}" class="btn btn-lg txt-uppercase" style="
 	border:0; margin-top: 10px;
-	background-color: {{content.style.accent_color_dark}};
+	background-color: {{content.palette.accent_color_dark}};
 	color: #ffffff; border-radius: 3px;">
 	<b>Commit</b>
 </a>

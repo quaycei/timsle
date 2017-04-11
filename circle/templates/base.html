@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load account %}
 
 <head>
 
@@ -79,43 +80,121 @@ animateValue("value", 100, 25, 2000);
 
 
 
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			
+			<div class="modal fade" id="modal-container-482063" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header">
+							 
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Sign in
+							</h4>
+						</div>
+						<div class="modal-body">
+							{% if user.is_authenticated %}
+    <p>Loged in with e-mail: {{ request.user.email }}</p>
+    <a href="{% url "account_logout" %}">Logout</a>
+{% else %}
+    <form action="{% url "account_login" %}" method="post">
+        {% csrf_token %}
+        <input type="username" placeholder="Username" name="login" class="loginform">
+        <input type="password" placeholder="Password" name="password" class="loginform">
+        {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+<br /><br />
+        How do I make an account?<br />
+        <a href="{% url 'account_reset_password' %}">How do I get a new password?</a>
+        </div>
+						<div class="modal-footer">
+							 
+					
+
+							<button type="submit" class="btn btn-primary">
+								Sign in
+							</button>
+ 
+        
+    </form>
+{% endif %}
+						
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+
 
 
 <body class="animated fadeIn" style="margin-top: -5px;">
 
 
 <div class="no-page-dots">
-<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0; background-color: white; color: black; position: relative;">
+<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0; background-color: white; color: black; position: relative; {% if circle.name %}{%else %} background-color:#3F51B5; color: white;{% endif%} ">
 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "dragThreshold": 3}'>
 
 
 
 
-{% if circle.name %}
+
 <div class="carousel-cell-nav-nav">
 <div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
-<h4 class="inline txt-caps " style="line-height: 10px;"><b>{{circle.name }}</b></h4>
+<h4 class="inline txt-caps " style="line-height: 10px;"><b>{% if circle.name %}{{circle.name }}{% else %}TIMSLE{% endif %}</b></h4>
 </div>
 </a>
 </div>
 
-{% endif %}
 
 
 
 
-{% if circle%}
 
+{% if circle %}
+
+{% if circle.rank != 3 %}
 
 {% for project in projects %}
 <div class="carousel-cell-nav-nav">
+<a href="{% url 'project_read' project_id=project.id %}">
 <div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
 <h4 class="inline txt-caps " style="line-height: 10px;">{{project.name}}</h4>
 </div>
 </a>
+</div>							
+{% endfor %}
+
+{% endif %}
+{% else %}
+
+<div class="carousel-cell-nav-nav">
+<a href="{% url 'group_list' %}">
+<div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
+<h4 class="inline txt-caps col-white " style="line-height: 10px;">Explore</h4>
 </div>
-							
-							{% endfor %}
+</a>
+</div>
+
+{% if circle.parent %}
+<div class="carousel-cell-nav-nav">
+<a href="{% url 'circle_list' circle_id=circle.parent.id %}">
+<div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
+<h4 class="inline txt-caps col-white " style="line-height: 10px;">{{circle.parent}}</h4>
+</div>
+</a>
+</div>
+{% endif %}
 
 
 {% endif %}
@@ -123,9 +202,12 @@ animateValue("value", 100, 25, 2000);
 
 
 
+
 </div>
 
-<a href="{% url 'account_login' %}" style=" position: fixed; right:20; padding: 15px; z-index: 99999; float: right; text-align: center; color: white; background-color:{{circle.palette.accent_color_dark}}; text-transform: uppercase; font-weight: 700; margin-top: -50px; ">Sign In</a> 
+<a {% if user.is_authenticated %} href="{% url 'circle_menu' %}"{% else %}
+ id="modal-482063" href="#modal-container-482063" role="button" data-toggle="modal" {% endif %} style=" position: fixed; right:20; padding: 15px; z-index: 99999; float: right; text-align: center; color: white; background-color:{{circle.palette.accent_color_dark}}; text-transform: uppercase; font-weight: 700; margin-top: -50px; ">{% if user.is_authenticated %}My Dashboard{% else %}Sign in{% endif %}</a> 
+
 </nav>
 </div>
 

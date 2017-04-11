@@ -3,60 +3,43 @@
 {% load circletags %}
 
 {% block content %}
-
 <style>
-.gradient1 {background: #e1e1e1;}
+body {background-color: #e5e5e4;}
 
 </style>
 
+<br />
+<br />
+<br />
+<br />
 
+<div class="container">
+<div class="col-md-10 col-md-offset-1">
+{% for circle in torus_circles %}
+						<a href="{% url 'circle_list' circle_id=circle.id %}">
+							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.{{forloop.counter}}s;">
 
+								<div class="btn-top-navigation" style="color: white; background-color: {{circle.palette.accent_color_dark}};">
+									<div class="clippy1">
+										<div class="inner-clip">
+											{% if circle.icon %}
+											<i class="material-icons md-4em col-white;" style="margin-top: 10px; border-radius: 50%; border: 8px dotted white; border-style: dashed dotted dotted dotted; padding: 20px;">{{circle.icon.text}}</i>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="btn-bottom-navigation center">
+									<h4 class="col-black center">{{circle.name}}</h4>
+									{% if circle.parent %}<a href="{% url 'circle_list' circle_id=circle.parent.id %}"><b>{{circle.parent.name}}</b></a>{% endif %}
+								</div>
+							</div>
+						</a>
+						{% empty%}
+						There are no circles here at this time.
+						{% endfor %}
 
-
-
-
-<div class="container-fluid">
-<div class="animated zoomIn">
-<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-<div class="row padding-y-50">
-
-
-<h5 class="txt-caps animated fadeIn">First, pick a general goal.</h5>
-<h3 class="animated fadeInDown" style="animation-delay: 0.25s">Where would you like to start?</h3>
-
-
-<br /><br />
-
-
-{% for circle in child_circles %}
-<a href="{% url 'project_list' group_slug=group.slug %}" class="a-dec-none col-xs-6 col-sm-4 col-md-3" >
-<div class="btn-holder-dark animated zoomInDown" style="animation-delay: 0.{{forloop.counter}}s">
-<i class="material-icons col-white md-4em">{% if group.icon.name %}{{group.icon.name}}{% endif %}</i><br />
-<p class="col-white"> {% if group.name%}{{group.name}}{% endif %}</p>
-</div>
-</a>
-{% endfor %}
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="container-fluid">
-<div class="row" style="background-color: rgba(0,0,0,0.8)">
-<div class="padding-y-80">
-<div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2" style="color: rgba(255,255,255,0.5);">
-{% if circle.name %}<h4>{{ circle.name }}</h4>{% endif %}
-    {% if circle.slug %}<h4>{{ circle.slug }}</h4>{% endif %}
-    {% if circle.website %}<h4>{{ circle.website}}</h4>{% endif %}
-    {% if circle.contact_name %}<h4>{{ circle.contact_name}}</h4>{% endif %}
-    {% if circle.phone_number %}<h4>{{ circle.phone_number}}</h4>{% endif %}
-    {% if circle.email %}<h4>{{ circle.email}}</h4>{% endif %}
 </div>
 </div>
-</div>
-</div>
-
 
 {% endblock %}
 

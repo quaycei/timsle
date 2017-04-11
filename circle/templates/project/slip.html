@@ -1,25 +1,29 @@
 
 
-<div class="padding-y-60 slip">
 	<div class="row">
 	<div class="col-md-10 col-md-offset-1">
 
 
 <div class="col-md-5">
-{% if project.name %}<h2><b>{{ project.name }}</b></h2>{% endif %}
-<a href="{% url 'project_read' project_id=project.id%}" >
-Explore
+{% if project.name %}<h2 style="font-weight: 200;">{{ project.name }}</h2>{% endif %}
+<br />
+<a href="{% url 'project_read' project_id=project.id%}" class="btn-explore btn center">
+<i class="material-icons">near_me</i>&nbsp EXPLORE<br />
+</a>
+
+<a href="{% url 'project_read' project_id=project.id%}" class="btn-explore btn center">
+<i class="material-icons">save</i>&nbsp SAVE<br />
 </a>
 </div>
 
 <div class="col-md-6 col-md-offset-1">
-{% if project.tagline %}<h4>{{ project.tagline }}</h4>{% endif %}
-{% if project.description %}{{ project.description }}<br />{% endif %}
+{% if project.tagline %}<h3><b>{{ project.tagline }}</b></h3>{% endif %}
+{% if project.description %}<h3 style="font-weight: 200;">{{ project.description }}</h3><br />{% endif %}
 </div>
 
 </div>
 <br />
 <br />
 </div>
-</div>
+
 

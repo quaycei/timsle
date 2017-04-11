@@ -20,7 +20,7 @@ VERIFICATION = (
     )
 
 RANK_TYPES = (
-        (0, 'Enterprise'),
+        (0, 'Torus'),
         (1, 'Station'),
         (2, 'Probe'),
         (3, 'Lander'),

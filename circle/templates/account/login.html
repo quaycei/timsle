@@ -1,11 +1,6 @@
-{% extends "account/base2.html" %}
-
 {% load i18n %}
 {% load account socialaccount %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
-
-{% block content %}
 
 
 
@@ -16,8 +11,8 @@
 
 {% if socialaccount_providers %}
 <p>{% blocktrans with site.name as site_name %}Please sign in with one
-of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+of your existing third party accounts. If you don't have an account, you can conti<a href="{{ signup_url }}">sign up</a>
+for a Timsle account and sign in below:{% endblocktrans %}</p>
 
 <div class="socialaccount_ballot">
 
@@ -29,7 +24,6 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 </div>
 
-{% include "socialaccount/snippets/login_extra.html" %}
 
 {% else %}
 <p>{% blocktrans %}If you have not created an account yet, then please
@@ -48,4 +42,3 @@ for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
 
 
-{% endblock %}

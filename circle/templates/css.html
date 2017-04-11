@@ -254,7 +254,7 @@ font-size: 6em;
 
 
 .cell-top {
-	background-color: rgba(0,0,0,0.2);
+	background-color: white;
 	position: relative;
 	z-index: 950;
 	padding: 20px;
@@ -264,7 +264,7 @@ font-size: 6em;
 }
 
 .cell-bottom {
-	background-color: rgba(255,255,255,0.15);
+	background-color: white;
 	z-index:900;
 	height: 270px;
 	border-radius: 0 0 6px 6px;
@@ -277,6 +277,13 @@ font-size: 6em;
  display: none;
 }
 
+
+.cell-tray {background-color: white;
+border-top: 1px solid rgba(0,0,0,0.3);
+padding: 5px;
+padding-left: 10px;
+padding-right: 10px;
+}
 
 
 .my-pact-icon {
@@ -472,6 +479,15 @@ height: 90px;
 
 }
 
+
+.loginform {
+	padding: 10px;
+	padding-left: 20px;
+	margin-top: 10px;
+	width: 100%;
+
+}
+
 .header-icon-holder {
 	padding-top: 10px;
 	background-color: {{circle.palette.foreground_color}};
@@ -498,18 +514,58 @@ height: 90px;
 
 }
 
+.header-icon-circle-md {
+	border-radius: 50%;
+	margin-top: 30px;
+	background-color: {{circle.palette.background_color}};
+	color: white;
+	height: 150px;
+	width: 150px;
+	text-align: center;
+	padding-top: 6px;
+	margin-left: -20px;
+	font-size: 2em;
+
+}
+.btn-explore {background-color: #3F51B5;
+	background-color: {{circle.palette.accent_color}};
+color: white;
+font-weight: 700;}
+
+
 .slip1 {
-	background-color: white;
+	background-color: {{circle.palette.background_color}};
 	padding-top: 80px;
 	padding-bottom: 80px;
-	text-align: center;
-	color: {{circle.palette.background_color}};
+	color: white;
+}
+
+.slip1 .btn-explore {
+	color: {{circle.palette.accent_color_light}};
+	background-color: white;
+
+}
+
+.slip1 .btn-explore {
+	color: {{circle.palette.accent_color_light}};
+	background-color: white;
+
 }
 
 
 .slip2 {
-	background-color: {{circle.palette.accent_color_light}};
-	color: black;
+	background-color: {{circle.palette.accent_color_dark}};
+	color: white;
+		padding-top: 80px;
+	padding-bottom: 80px;
 }
+
+.slip2 .btn-explore {
+		color: {{circle.palette.accent_color_dark}};
+	background-color: white;
+
+}
+
+
 
 </style>

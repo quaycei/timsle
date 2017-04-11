@@ -39,6 +39,15 @@ def circle_list(request, circle_id):
 		})
 
 
+def group_list(request):
+	torus_circles = Circle.objects.all().filter(rank=0).filter(verification=1).filter(status=1)
+	projects = Project.objects.filter(status=1)
+
+	return render(request, 'group/list.html',{
+		'torus_circles':torus_circles,
+		'projects':projects,
+		})
+
 
 def project_read(request, project_id):
 	project = Project.objects.get(id=project_id)

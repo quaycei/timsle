@@ -1,32 +1,54 @@
 {% load circletags %}
 
-<style>
-body { background-color: {{circle.palette.background_color}};}
-</style>
+<div class="container-fluid" style="background-color: white;">
+	<div class="row">
+		<div class="col-sm-11 col-sm-offset-1">
+		
+			{% if circle.icon %}
+			<div class="col-md-2">
+						<div class="header-icon-circle-md animated zoomIn">
+							<i class="material-icons md-3em col-white;" style=" border: 3px dotted white; padding: 25px; border-radius: 50%">{{circle.icon.text}}</i>
+						</div>
+						</div>
+					{% endif %} 
 
-	
-	<div class="container-fluid" style="background-color: {{circle.palette.background_color}};">
+			<div class="col-sm-8 animated slideInRight">
+				<br />
+				<br />	
+				<h1 style="font-weight: 300;">{{circle.tagline}}</h1>
+				{% if circle.description %}
+				<h3 style="font-weight: 200;">{{circle.description}}</h3>
+				{% endif %}
+				<br />
+				<br />
+				<br />
+				<br />
+			</div>
+			
+				
+				
+					
+					</div>
+				</div>
+			
+		
+	</div>
+
+
+	{% if child_circles %}
+	<div class="container-fluid" style="background-color: {{circle.palette.background_color}}; z-index: 1;">
 		<div class="row ">
 			<div class="container">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
-<div class="row">
-<div class="col-sm-7">
-				<div class="chat-holder animated zoomIn">
-				<i class="material-icons col-white">chat</i>
-<h4 class="col-white">{{circle.tagline}}</h4>
-<p class="col-white">{{circle.description}}</p>
-</div>
-				</div>
-				</div>
-					<div class="question-holder animated fadeInDown">
+					<div class="question-holder">
 						<i class="fa fa-spin  col-white fa-circle-o-notch"></i>&nbsp
-						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white" style="font-weight: 300;">{{circle.directional_question}}</h3></h4>
+						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white " style="font-weight: 300;">{{circle.directional_question}}</h3></h4>
 					</div>
 					<br />
 					<div class="row">
 						{% for circle in child_circles %}
 						<a href="{% url 'circle_list' circle_id=circle.id %}">
-							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.5{{forloop.counter}}s;">
+							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.{{forloop.counter}}s;">
 
 								<div class="btn-top-navigation" style="color: white;">
 									<div class="clippy1">
@@ -50,8 +72,55 @@ body { background-color: {{circle.palette.background_color}};}
 			</div>
 		</div>
 	</div>
+	{% endif %}
 
 
+{% if projects %}
 	{% for project in projects %}
+	<div class="animated fadeInUp" style="animation-delay:0.{{forloop.counter}}s;">
+	<div class="{% cycle 'slip1' 'slip2' %}">
 	{% project_slip project_id=project.id %}
+	</div>
+	</div>
 	{% endfor %}
+{% endif %}
+
+	<div class="container-fluid">
+		<div class="row footer">
+			<div class="container">
+				<div class="col-xs-12 col-md-10 col-md-offset-1">
+					<div class="row">
+						<div class="col-sm-4">
+							{% if circle.name %}<h3><b>{{circle.name}}</b></h3><br />{% endif %}
+							{% if circle.contact %}
+							{% if circle.contact.contact_name %}<b>{{circle.contact.contact_name}}</b>{% endif %}
+							{% if circle.contact.phone_number %}<p>{{circle.contact.phone_number}}</p>{% endif %}
+							{% if circle.contact.email_address %}<p>{{circle.contact.email_address}}</p>{% endif %}
+							{% endif %}
+						</div>
+						<div class="col-sm-4">
+							{% for project in projects %}
+							{{project.name}}<br /><br />
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="padding-y-20" style="background-color: black">
+		<div class="container">
+			<div class="col-xs-12 col-md-10 col-md-offset-1">
+				<div class="col-sm-10">
+					<p style="color: rgba(255,255,255,0.3); font-weight: 500;"><b>© 2017. All rights reserved. Powered by Timsle.</b>
+						<br />
+						Timsle is designed to help us improve our health, reach our goals, and live better lives.</p>
+
+					</div>
+
+					<div class="btn btn-default" style="background-color: rgba(255,255,255,0.3); opacity: 0.3; float: right; margin-top: 8px;"><b>Explore Timsle</b></div>
+				</div>
+			</div>
+		</div>	
+	</div>
+

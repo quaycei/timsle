@@ -8,7 +8,7 @@
 				<br />	
 				<h1 style="font-weight: 500;">{{circle.tagline}}</h1>
 				{% if circle.description %}
-				<h2 style="font-weight: 300;">{{circle.description}}</h2>
+				<h3 style="font-weight: 300;">{{circle.description}}</h3>
 				{% endif %}
 				<div class="brick-underline"></div>
 				<br />
@@ -69,9 +69,12 @@
 	{% endif %}
 
 
+{% if projects %}
 	{% for project in projects %}
 	{% project_slip project_id=project.id %}
 	{% endfor %}
+{% endif %}
+
 	<div class="container-fluid">
 		<div class="row footer">
 			<div class="container">

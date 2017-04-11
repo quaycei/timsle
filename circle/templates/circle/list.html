@@ -6,6 +6,8 @@
 {% if circle.rank == 0 %}
 {% include 'circle/Relay/Torus/list.html' %}
 {% elif circle.rank == 2 %}
+{% include 'circle/Relay/Probe/list.html' %}
+{% elif circle.rank == 3 %}
 {% include 'circle/Relay/Lander/list.html' %}
 {% endif %}
 
