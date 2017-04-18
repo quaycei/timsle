@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+    'djstripe',
     'palette',
+    'registry',
     'circle',
     'pact',
     'allauth',
@@ -151,8 +153,30 @@ ACCOUNT_SESSION_REMEMBER = True
 LOGIN_REDIRECT_URL = 'circle_menu'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_SIGNUP_FORM_CLASS='profile.forms.SignupForm'
+
 
 SITE_ID = 1
 
-DISABLE_COLLECTSTATIC=1
+
+STRIPE_PUBLIC_KEY ='pk_test_sJndmw3jZyCPFhfVAgzq4BXQ'
+STRIPE_SECRET_KEY ='sk_test_AEH8zUQeVclNnp9shl5GzBkM'
+
+
+DJSTRIPE_PLANS = {
+    "monthly": {
+        "stripe_plan_id": "pro-monthly",
+        "name": "Web App Pro ($25/month)",
+        "description": "The monthly subscription plan to WebApp",
+        "price": 2500,  # $25.00
+        "currency": "usd",
+        "interval": "month"
+    },
+    "yearly": {
+        "stripe_plan_id": "pro-yearly",
+        "name": "Web App Pro ($199/year)",
+        "description": "The annual subscription plan to WebApp",
+        "price": 19900,  # $199.00
+        "currency": "usd",
+        "interval": "year"
+    }
+}

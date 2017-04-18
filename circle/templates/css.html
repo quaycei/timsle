@@ -196,15 +196,12 @@ font-size: 6em;
 
 .btn-checkin {
 	border-radius: 50%;
-	padding:11px;
+	padding:2px;
 	padding-left: 10px;
 	padding-right:10px;
 	font-weight: 700;
-	float: right;
 	height: 60px;
 	width: 60px;
-	font-size: 2.3em;
-
 
 }
 
@@ -259,8 +256,8 @@ font-size: 6em;
 	z-index: 950;
 	padding: 20px;
 	padding-bottom: 8px;
-	height: 230px;
-	border-radius: 6px 6px 0 0;
+	height: 260px;
+	border-radius: 3px 3px 0 0;
 }
 
 .cell-bottom {
@@ -278,9 +275,9 @@ font-size: 6em;
 }
 
 
-.cell-tray {background-color: white;
-border-top: 1px solid rgba(0,0,0,0.3);
-padding: 5px;
+.cell-tray {
+border-top: 1px solid #E5E5E4;
+padding: 10px;
 padding-left: 10px;
 padding-right: 10px;
 }
@@ -416,7 +413,8 @@ display:none;
 }
 
 .question-holder {
-
+background-color: rgba(0,0,0,0.4);
+border-radius: 3px;
 
 	padding: 15px;
 
@@ -497,7 +495,6 @@ height: 90px;
 	width:100%;
 	border-radius: 40px 0 0 0;
 	float: bottom;
-	border-bottom: 10px solid {{circle.palette.background_color}};
 }
 
 .header-icon-circle {
@@ -530,42 +527,107 @@ height: 90px;
 .btn-explore {background-color: #3F51B5;
 	background-color: {{circle.palette.accent_color}};
 color: white;
+position: relative;
+width: 100px;
 font-weight: 700;}
 
-
+.btn-explore i {  }
+.btn-explore b { padding-bottom: 20px;}
 .slip1 {
+	background-color: {{project.palette.background_color}};
 	background-color: {{circle.palette.background_color}};
+
 	padding-top: 80px;
 	padding-bottom: 80px;
 	color: white;
 }
 
 .slip1 .btn-explore {
-	color: {{circle.palette.accent_color_light}};
-	background-color: white;
-
-}
-
-.slip1 .btn-explore {
-	color: {{circle.palette.accent_color_light}};
-	background-color: white;
+	color: white;
+		background-color: {{project.palette.accent_color_dark}};
+	background-color: {{circle.palette.accent_color_dark}};
 
 }
 
 
 .slip2 {
-	background-color: {{circle.palette.accent_color_dark}};
 	color: white;
+		background-color: {{project.palette.accent_color_dark}};
+	background-color: {{circle.palette.accent_color_dark}};
+
 		padding-top: 80px;
 	padding-bottom: 80px;
 }
 
 .slip2 .btn-explore {
-		color: {{circle.palette.accent_color_dark}};
-	background-color: white;
+		background-color: {{project.palette.background_color}};
+	background-color: {{circle.palette.background_color}};
+	color: white;
 
 }
 
+.home-slip1 {
+	background-color: {{circle.palette.accent_color_dark}};
+	color:white;
+	}
+
+.home-slip1 .btn-explore {
+	background-color: {{circle.palette.background_color}}
+}
 
 
+.home-slip2 {
+	background-color: white;
+}
+
+.home-slip2 .btn-explore {
+	background-color: {{circle.palette.accent_color_dark}}
+}
+
+
+.verification-0:before {
+	background-color: #FF9800;
+	content: "PENDING";
+	font-weight: 700;
+	font-size: 0.9em;
+	color: white;
+	border-radius: 3px;
+	padding: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+
+.verification-1:before {
+	background-color: #8BC34A;
+	content: "VERIFIED";
+	font-weight: 700;
+	font-size: 0.9em;
+	color: white;
+	border-radius: 3px;
+	padding: 3px;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+
+.color-sample{
+	width: 40px;
+	height: 40px;
+	border-radius: 2px;
+	margin: 1px;
+	display: inline-block;
+}
+
+
+.lines {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 30px;
+	border-radius: 3px;
+
+}
+
+.line1{ background-color: rgba(0,0,0,0.1); }
+.line2{ background-color: white; }
 </style>

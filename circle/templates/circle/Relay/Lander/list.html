@@ -34,7 +34,7 @@
 		
 	</div>
 
-
+<!--
 	{% if child_circles %}
 	<div class="container-fluid" style="background-color: {{circle.palette.background_color}}; z-index: 1;">
 		<div class="row ">
@@ -73,6 +73,11 @@
 		</div>
 	</div>
 	{% endif %}
+---->
+
+
+
+
 
 
 {% if projects %}
@@ -98,11 +103,7 @@
 							{% if circle.contact.email_address %}<p>{{circle.contact.email_address}}</p>{% endif %}
 							{% endif %}
 						</div>
-						<div class="col-sm-4">
-							{% for project in projects %}
-							{{project.name}}<br /><br />
-							{% endfor %}
-						</div>
+
 					</div>
 				</div>
 			</div>
@@ -115,9 +116,7 @@
 					<p style="color: rgba(255,255,255,0.3); font-weight: 500;"><b>© 2017. All rights reserved. Powered by Timsle.</b>
 						<br />
 						Timsle is designed to help us improve our health, reach our goals, and live better lives.</p>
-
 					</div>
-
 					<div class="btn btn-default" style="background-color: rgba(255,255,255,0.3); opacity: 0.3; float: right; margin-top: 8px;"><b>Explore Timsle</b></div>
 				</div>
 			</div>

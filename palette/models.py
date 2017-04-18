@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import validate_slug
 
+from registry.models import Registry
+
 
 class Element(models.Model):
     ELEMENT_TYPES = (
@@ -22,6 +24,7 @@ class Element(models.Model):
 
 
 class Palette(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     name = models.CharField(max_length=50)

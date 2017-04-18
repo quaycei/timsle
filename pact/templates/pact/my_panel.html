@@ -18,12 +18,13 @@ var noScroll = document.getElementById('noScroll')
 <div class="center ">
 <div style="
     border-radius: 3px; height: 70px; margin-top:2px; margin-bottom: 18px;">
-<h1 style="line-height: 69px; font-size: 8em; font-weight: 700; ">{{pact.get_checkin_count}}
+<h1 style="line-height: 69px; font-size: 8em; font-weight: 200; ">{{pact.get_checkin_count}}
 </h1>
 </div>
 </div>
 <div class="row">
 <div class="col-xs-12">
+<br />
 <h5 class="inline txt-caps" ><b>{{ pact.owner }}&nbsp </b> {{pact.content.project.group}}</h5>
 <h4 class="">{{pact.answer }}</h4><br />
 </div>
@@ -32,7 +33,7 @@ var noScroll = document.getElementById('noScroll')
 </div>
 
 
-<div class="cell-bottom">
+<div class="cell-bottom" >
 
 
 {% for checkin in checkins %}
@@ -46,7 +47,7 @@ Checked in by {{ checkin.submitted_by }}</p><br /><br />
 </div>
 </div>
 {% empty %}
-<div class="box-empty animated zoomIn" style="animation-delay:0.8s; border-color:white; ">
+<div class="box-empty" style="animation-delay:0.8s; border-color:white; ">
 <div class="center  col-black">
 <i class="material-icons" style="font-size: 3em;">sentiment_dissatisfied</i><br /><br />
 There are no check-ins yet.
@@ -54,11 +55,14 @@ There are no check-ins yet.
 </div>
 {% endfor %}
 
-<div class="cell-tray">
-<a href="{% url 'project_read' project_id=pact.content.project.id%}" class="btn btn-explore">Explore</a>
+<div class="cell-tray" style="position: fixed; bottom: 0; width: 100%; background-color: white; width:300px;">
+<a href="{% url 'project_read' project_id=pact.content.project.id%}" class="btn btn-explore" style="background-color: {{pact.content.palette.accent_color_dark}}">Explore</a>
 </div>
 
 </div>
+
+
+
 
 
 

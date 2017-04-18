@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 
-from circle.models import Circle, Project, Content
+from circle.models import Circle, Link, Project, Content
 
 
 register = template.Library()
@@ -17,6 +17,21 @@ def content_slip(content_id):
             'content':content,
            }
        
+
+@register.inclusion_tag('circle/portal.html')
+def portal_slip(circle_id, link_id):
+    circle = Circle.objects.get(id=circle_id)
+    link = Link.objects.get(id=link_id)
+    child_circles = link.parent.all()
+
+
+    return {
+            'circle':circle,
+            'link':link,
+            'child_circles':child_circles,
+           }
+
+
 
 @register.inclusion_tag('project/slip.html')
 def project_slip(project_id):

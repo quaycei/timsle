@@ -142,7 +142,7 @@ animateValue("value", 100, 25, 2000);
 
 
 <div class="no-page-dots">
-<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0; background-color: white; color: black; position: relative; {% if circle.name %}{%else %} background-color:#3F51B5; color: white;{% endif%} ">
+<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0;  color: black; position: relative;  {% if circle %}background-color: white; {% elif project %}background-color: {{project.palette.accent_color_dark}}; color: white;{% else %}background-color: #3F51B5; color: white;{% endif%} ">
 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "dragThreshold": 3}'>
 
 
@@ -169,7 +169,7 @@ animateValue("value", 100, 25, 2000);
 <div class="carousel-cell-nav-nav">
 <a href="{% url 'project_read' project_id=project.id %}">
 <div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
-<h4 class="inline txt-caps " style="line-height: 10px;">{{project.name}}</h4>
+<h4 class="inline txt-caps " style="line-height: 10px; color: {{circle.palette.foreground_color}};">{{project.name}}</h4>
 </div>
 </a>
 </div>							
@@ -206,7 +206,7 @@ animateValue("value", 100, 25, 2000);
 </div>
 
 <a {% if user.is_authenticated %} href="{% url 'circle_menu' %}"{% else %}
- id="modal-482063" href="#modal-container-482063" role="button" data-toggle="modal" {% endif %} style=" position: fixed; right:20; padding: 15px; z-index: 99999; float: right; text-align: center; color: white; background-color:{{circle.palette.accent_color_dark}}; text-transform: uppercase; font-weight: 700; margin-top: -50px; ">{% if user.is_authenticated %}My Dashboard{% else %}Sign in{% endif %}</a> 
+ id="modal-482063" href="#modal-container-482063" role="button" data-toggle="modal" {% endif %} style=" position: fixed; right:20; padding: 15px; z-index: 99999; float: right; text-align: center; color: white; background-color:{{circle.palette.accent_color_dark}};  text-transform: uppercase; font-weight: 700; margin-top: -50px; ">{% if user.is_authenticated %}My Dashboard{% else %}Sign in{% endif %}</a> 
 
 </nav>
 </div>

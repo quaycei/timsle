@@ -5,6 +5,8 @@ from django.core.validators import validate_slug
 from django.contrib.contenttypes.fields import GenericRelation
 from palette.models import Palette, Element
 
+from registry.models import Registry, Contact
+
 STATUS = (
         (0, 'Pending'),
         (1, 'Online'),
@@ -19,48 +21,56 @@ VERIFICATION = (
         (3, 'Declined'),
     )
 
+
+CONNECTION_TYPES = (
+        (0, 'Internal'),
+        (1, 'External'),
+    )
+
 RANK_TYPES = (
         (0, 'Torus'),
         (1, 'Station'),
         (2, 'Probe'),
         (3, 'Lander'),
         (4, 'Mothership'),
-
     )
 
-class Contact(models.Model):
-    contact_name = models.CharField(max_length=140, default=None, blank=True)
-    website = models.CharField(max_length=140, default=None, blank=True)
-    phone_number = models.CharField(max_length=140, default=None, blank=True)
-    email_address = models.CharField(max_length=140, default=None, blank=True)
-    contact_note = models.TextField(max_length=300, default=None, blank=True)
-
-    def __str__(self):
-        return self.contact_name
 
 
 class Circle(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
     rank = models.IntegerField(choices=RANK_TYPES,default=0)
     verification = models.IntegerField(choices=VERIFICATION,default=0)
     status = models.IntegerField(choices=STATUS,default=0)
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
-    parent = models.ForeignKey('self', null=True, blank=True, default=None)
     slug = models.CharField(max_length=21, null=True, blank=True, unique=True, validators=[validate_slug])
     name = models.CharField(max_length=50)
     icon = models.ForeignKey(Element, null=True, blank=True, default=None)
     contact = models.ForeignKey(Contact, null=True, blank=True, default=None)
     tagline = models.CharField(max_length=140, default=None, blank=True)
     description = models.TextField(max_length=140, default=None, blank=True)
-    directional_question = models.CharField(max_length=140, null=True, default="What would you like to do?", blank=True,)
 
 
     def __str__(self):
         return self.name 
 
 
+class Link(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
+    circle = models.ForeignKey(Circle, default=None)
+    connection_type = models.IntegerField(choices=CONNECTION_TYPES,default=0)
+    verification = models.IntegerField(choices=VERIFICATION,default=1)
+    name = models.CharField(max_length=21)
+    parent = models.ManyToManyField('Circle', related_name='parents', default=None, blank=True)
+    directional_question = models.CharField(max_length=140, null=True, default="What would you like to do?", blank=True,)
+
+    def __str__(self):
+        return self.name 
+
 class Project(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
     status = models.IntegerField(
         choices=STATUS,
         default=0,
@@ -81,6 +91,7 @@ class Project(models.Model):
 
 
 class Content(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
     status = models.IntegerField(
         choices=STATUS,
         default=0,
@@ -111,6 +122,7 @@ class Content(models.Model):
 
 
 class Guideline(models.Model):
+    registry = models.ForeignKey(Registry, default=None)
     rank = models.IntegerField(choices=RANK_TYPES,default=3)
     status = models.IntegerField(
         choices=STATUS,

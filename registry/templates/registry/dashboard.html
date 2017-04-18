@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load circletags %}
+{% load palettetags %}
+
+{% block content %}
+
+
+
+<br />
+<br />
+<br />
+
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+<h1 style="font-weight: 300">{{ registry.name }}</h1>
+{% if registry.mission %}<h3 style="font-weight: 200;">{{ registry.mission }}</h3>{% endif %}
+
+
+<div class="verification-{{registry.verification}}"></div>
+
+<br /><br /><br />
+
+<div class="row">
+<h3 style="font-weight: 400" class="txt-caps">Circles</h3>
+<h4 style="font-weight: 300">Use circles to build the sturcture of your organization.</h4>
+<br />
+{% for circle in circles %}
+<div class="{% cycle 'line1' 'line2' %}">
+<div class="row lines" >
+<div class="col-sm-4">
+<h4>{{circle.name }}</h4>
+</div>
+<div class="col-sm-4">
+{{circle.tagline }}
+</div>
+<div class="col-sm-4">
+<a href="{% url 'circle_update' circle_id=circle.id %}" class="btn btn-default btn-sm">UPDATE</a>
+<a href="{% url 'circle_list' circle_id=circle.id %}" class="btn btn-default btn-sm">OPEN</a>
+</div>
+</div>
+</div>
+{% empty %}
+There are no circles associated with this registry yet.
+{% endfor %}
+</div>
+<br />
+<a href="{% url 'circle_create' registry_id=registry.id %}" class="btn-default btn">Add Circle</a>
+
+
+
+<br /><br /><br />
+
+<div class="row">
+<h3 style="font-weight: 400" class="txt-caps">Projects</h3>
+<h4 style="font-weight: 300">Use projects to organize actions and habits for your audience.</h4>
+<br />
+{% for project in projects %}
+<div class="{% cycle 'line1' 'line2' %}">
+<div class="row lines" >
+<div class="col-sm-3">
+<h4>{{project.name }}</h4>
+</div>
+<div class="col-sm-4">
+<a href="{% url 'project_update' project_id=project.id %}" class="btn btn-default btn-sm">UPDATE</a>
+<a href="{% url 'project_read' project_id=project.id %}" class="btn btn-default btn-sm">OPEN</a>
+</div>
+</div>
+</div>
+
+{% empty %}
+There are no Projects associated with this registry yet.
+{% endfor %}
+</div>
+<br />
+<a href="{% url 'project_create' registry_id=registry.id %}" class="btn-default btn">Add Project</a>
+
+
+<br /><br /><br />
+
+
+
+<div class="row">
+<h3 style="font-weight: 400" class="txt-caps">Contact</h3>
+<h4 style="font-weight: 300">Use contacts to connect your audience with the people they are looking for.</h4><br />
+{% for contact in contacts %}
+<div class="{% cycle 'line1' 'line2' %}">
+<div class="row lines" >
+<div class="col-sm-3">
+<h4> {{ contact.first_name }} {{ contact.last_name }}</h4>
+{{contact.email_address}}
+</div>
+<div class="col-sm-3">
+{% if contact.office %}<b>{{contact.office}}</b>{% endif %}<br />
+{% if contact.phone_number %}{{ contact.phone_number }}{% endif %}
+</div>
+<div class="col-sm-3">
+
+</div>
+<div class="col-sm-3">
+<a href="{% url 'contact_update' contact_id=contact.id %}" class="btn btn-default btn-sm">UPDATE</a>
+<a href="{% url 'contact_read' contact_id=contact.id %}" class="btn btn-default btn-sm">OPEN</a>
+</div>
+</div>
+</div>
+{% empty %}
+There are no Contacts associated with this registry yet.
+{% endfor %}
+<br />
+<a href="{% url 'contact_create' registry_id=registry.id %}" class="btn-default btn">Add Contact</a>
+</div>
+<br />
+
+<br />
+
+<br />
+
+
+<div class="row">
+<h3 style="font-weight: 400" class="txt-caps">Palettes</h3>
+<h4 style="font-weight: 300">Use Palettes to adjust the look and feel of your information.
+</h4><br />
+{% for palette in palettes%}
+<div class="{% cycle 'line1' 'line2' %}">
+<div class="row lines" >
+<div class="col-sm-3">
+<h4>{{palette.name}}</h4>
+</div>
+<div class="col-sm-4">
+<div class="color-sample" style="background-color: {{ palette.background_color}};"></div>
+<div class="color-sample" style="background-color: {{ palette.foreground_color}};"></div>
+<div class="color-sample" style="background-color: {{ palette.accent_color_dark}};"></div>
+<div class="color-sample" style="background-color: {{ palette.accent_color_light}};"></div>
+</div>
+</div>
+</div>
+{% empty %}
+There are no Palettes associated with this registry yet.
+{% endfor %}
+</div>
+<br />
+<br /><br /><br /><br />
+
+<a href="{% url 'registry_update' registry_id=registry.id %}" class="btn btn-default">Settings </a>
+
+
+
+
+
+
+{% endblock %}
+

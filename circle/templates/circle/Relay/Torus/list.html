@@ -14,12 +14,12 @@
 				<br />
 				<br />
 			</div>
-			<div class="col-sm-3 col-sm-offset-1 animated fadeInRight" style="padding: 0; z-index: 0;">
+			<div class="col-sm-3 col-sm-offset-1 animated fadeInRight" style="padding: 0; z-index: 0; ">
 				<div class="row">
 					{% if circle.icon %}
 					<div class="header-icon-holder">
 						<div class="header-icon-circle animated zoomIn">
-							<i class="material-icons md-4em col-white;" style=" border: 10px dotted white; padding: 10px; border-radius: 50%">{{circle.icon.text}}</i>
+							<i class="material-icons md-3em col-white;" style=" border: 10px dotted white; padding: 25px; border-radius: 50%">{{circle.icon.text}}</i>
 						</div>
 						{% endif %} </div>
 					</div>
@@ -28,15 +28,19 @@
 		</div>
 	</div>
 
-
+<!---
 	{% if child_circles %}
 	<div class="container-fluid" style="background-color: {{circle.palette.background_color}}; z-index: 1;">
 		<div class="row ">
 			<div class="container">
 				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
+				<div class="row">
+				<div class="col-sm-8" style="padding:0">
 					<div class="question-holder">
-						<i class="fa fa-spin  col-white fa-circle-o-notch"></i>&nbsp
-						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white " style="font-weight: 300;">{{circle.directional_question}}</h3></h4>
+						<i class="material-icons col-white">chat</i>&nbsp
+						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white " style="font-weight: 500;">{{circle.directional_question}}</h3></h4>
+					</div>
+					</div>
 					</div>
 					<br />
 					<div class="row">
@@ -67,11 +71,19 @@
 		</div>
 	</div>
 	{% endif %}
+---->
+
+{% for link in links %}
+{% portal_slip circle_id=circle.id link_id=link.id %}
+{% endfor %}
 
 
 {% if projects %}
+
 	{% for project in projects %}
+	<div class="{% cycle 'home-slip1' 'home-slip2' %} padding-y-80">
 	{% project_slip project_id=project.id %}
+	</div>
 	{% endfor %}
 {% endif %}
 
@@ -88,10 +100,9 @@
 							{% if circle.contact.email_address %}<p>{{circle.contact.email_address}}</p>{% endif %}
 							{% endif %}
 						</div>
-						<div class="col-sm-4">
-							{% for project in projects %}
-							{{project.name}}<br /><br />
-							{% endfor %}
+						<div class="col-sm-4 col-sm-offset-1">
+						<br /> <br />
+							{% if circle.contact.contact_note%}<p>{{circle.contact.contact_note}}</p>{% endif %}
 						</div>
 					</div>
 				</div>

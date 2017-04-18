@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+
+
+
+    <form action="{% url 'registry_update' registry_id=registry.id %}" method="post" enctype="multipart/form-data"> 
+                      {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+
+
+{% endblock %}
+

@@ -1,11 +1,12 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from allauth.account.decorators import verified_email_required
-
-from circle.models import Circle, Project, Content, Guideline
+from circle.models import Circle, Link, Project, Content, Guideline
+from registry.models import Registry, Contact
 from pact.models import Pact, Buddy, Checkin
+from circle.forms import CircleForm, ProjectForm
 
 
 @verified_email_required
@@ -24,17 +25,14 @@ def circle_menu(request):
         })
 
 
-
-
-
 def circle_list(request, circle_id):
 	circle = Circle.objects.get(id=circle_id)
-	child_circles = circle.circle_set.all().filter(parent=circle).filter(verification=1).filter(status=1)
+	links = circle.link_set.all().filter(connection_type=0)
 	projects = circle.project_set.all().filter(status=1)
 
 	return render(request, 'circle/list.html',{
 		'circle':circle,
-		'child_circles':child_circles,
+		'links':links,
 		'projects':projects,
 		})
 
@@ -71,4 +69,87 @@ def content_read(request, project_id, content_id):
 		'content':content,
 		'guideline_examples':guideline_examples,
 		'guideline_rules':guideline_rules,
+		})
+
+
+@verified_email_required
+def project_create(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	projectform = ProjectForm()
+
+	if request.method == 'POST':
+		projectform = ProjectForm(request.POST)
+		if projectform.is_valid():
+			project = projectform.save(commit=False)
+			project.creator = request.user
+			project.registry = registry
+			project.verification = registry.verification
+			project.save()
+			messages.success(request, 'You created a new project')
+                
+			return redirect(registry_list)
+    
+	return render(request, 'project/update.html', {'form': projectform})
+
+
+@verified_email_required
+def project_update(request, project_id):
+	project = Project.objects.get(id=project_id)
+	projectform = ProjectForm(instance=project)
+
+	if request.method == 'POST':
+		projectform = ProjectForm(request.POST)
+		if projectform.is_valid():
+			project.save()
+			messages.success(request, 'You updated this project')
+                
+			return redirect(registry_list)
+    
+	return render(request, 'project/update.html', {
+		'project':project,
+		'form': projectform,
+		})
+
+@verified_email_required
+def circle_create(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	circleform = CircleForm()
+
+	if request.method == 'POST':
+		circleform = CircleForm(request.POST)
+		if circleform.is_valid():
+			circle = circleform.save(commit=False)
+			circle.creator = request.user
+			circle.registry = registry
+			circle.verification = registry.verification
+			circle.save()
+			messages.success(request, 'You created a new circle')
+			return redirect(circle_list)
+                
+	else:
+		circleform = CircleForm()
+
+    
+	return render(request, 'circle/update.html', {'form': circleform})
+
+
+
+
+
+@verified_email_required
+def circle_update(request, circle_id):
+	circle = Circle.objects.get(id=circle_id)
+	circleform = CircleForm(instance=circle)
+
+	if request.method == 'POST':
+		circleform = CircleForm(request.POST)
+		if circleform.is_valid():
+			circle.save()
+			messages.success(request, 'You updated this circle')
+                
+			return redirect(registry_list)
+    
+	return render(request, 'circle/update.html', {
+		'circle':circle,
+		'form': circleform,
 		})

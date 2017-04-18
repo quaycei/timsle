@@ -8,5 +8,10 @@ urlpatterns = [
     url(r'^circle/(?P<circle_id>[\w-]+)/$', views.circle_list, name='circle_list'),
     url(r'^project/(?P<project_id>[\w-]+)/$', views.project_read, name='project_read'),
     url(r'^challenge/(?P<project_id>[\w-]+)/(?P<content_id>[\w-]+)/$', views.content_read, name='content_read'),
+    url(r'^project/(?P<project_id>[\w-]+)/update/$', views.project_update, {}, 'project_update'),
+    url(r'^registry/(?P<registry_id>[\w-]+)/project/create/$', views.project_create, {}, 'project_create'),
+     url(r'^circle/(?P<circle_id>[\w-]+)/update/$', views.circle_update, {}, 'circle_update'),
+    url(r'^registry/(?P<registry_id>[\w-]+)/circle/create/$', views.circle_create, {}, 'circle_create'),
+
 ]
 

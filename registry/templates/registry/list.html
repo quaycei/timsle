@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+
+<br />
+<br />
+
+<br />
+
+{% for registry in my_registrys %}
+<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="btn btn-default"> {{ registry.name }}</a>
+<br />
+{% empty %}
+You do not have any registrys associated with your account. 
+{% endfor %}
+
+
+<a href="{% url 'registry_create' %}" class="btn btn-default">Create a Regisrty </a>
+{% endblock %}
+
