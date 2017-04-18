@@ -9,6 +9,8 @@ from django.contrib.contenttypes.fields import GenericRelation
 
 
 
+
+
 STATUS = (
         (0, 'Pending'),
         (1, 'Online'),
@@ -23,6 +25,22 @@ VERIFICATION = (
         (3, 'Declined'),
     )
 
+
+class Services(models.Model):
+    name = models.CharField(max_length=25)
+    verification = models.IntegerField(choices=VERIFICATION, default=0)
+    status = models.IntegerField(choices=STATUS, default=0)
+    icon = models.ForeignKey('palette.Element', null=True, blank=True, default=None)
+    service_url = models.CharField(max_length=140, default=None, blank=True, null=True)
+    service_label = models.CharField(max_length=140, default=None, blank=True, null=True)
+    description = models.TextField(max_length=250, default=None)
+
+    def __str__(self):
+        return self.name 
+
+
+
+
 class Registry(models.Model):
     creator = models.ForeignKey(User, default=None, null=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, null=True)
@@ -30,6 +48,9 @@ class Registry(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     name = models.CharField(max_length=50)
     mission = models.TextField(max_length=250, default=None)
+    services = models.ManyToManyField(Services, blank=True)
+    palette = models.ForeignKey('palette.Palette', blank=True, null=True, default=None)
+
 
     
     def __str__(self):

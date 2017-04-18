@@ -4,7 +4,7 @@ from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from allauth.account.decorators import verified_email_required
 from circle.models import Circle, Link, Project, Content, Guideline
-from registry.models import Registry, Contact
+from registry.models import Services, Registry, Contact
 from registry.forms import RegistryForm, ContactForm
 from palette.models import Palette
 
@@ -57,14 +57,14 @@ def registry_update(request, registry_id):
 
 def registry_dashboard(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
-	palettes = registry.palette_set.all()
 	contacts = registry.contact_set.all()
 	circles = registry.circle_set.all()
+	services = registry.services.all()
 
 	return render(request, 'registry/dashboard.html', {
 		'registry':registry,
+		'services':services,
 		'circles':circles,
-		'palettes':palettes,
 		'contacts':contacts,
 		})
 

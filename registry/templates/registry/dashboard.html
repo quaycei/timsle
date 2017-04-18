@@ -17,9 +17,66 @@
 {% if registry.mission %}<h3 style="font-weight: 200;">{{ registry.mission }}</h3>{% endif %}
 
 
-<div class="verification-{{registry.verification}}"></div>
-
+<hr>
+<i class="material-icons" style="display: inline;">lock</i>&nbsp <b style="font-weight: 700">ADMIN</b> &nbsp &nbsp 
+<div class="verification-{{registry.verification}} inline"></div>
 <br /><br /><br />
+</div>
+</div>
+</div>
+
+	<div class="container-fluid" style="background-color: {{registry.palette.background_color}}; z-index: 1;">
+		<div class="row ">
+			<div class="container">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
+				<div class="row">
+				<div class="col-sm-8" style="padding:0">
+					<div class="question-holder">
+						<i class="material-icons col-white">chat</i>&nbsp
+						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white " style="font-weight: 500;">What would you like to do?</h3></h4>
+					</div>
+					</div>
+					</div>
+					<br />
+					<div class="row">
+						{% for service in services %}
+						<a>
+							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.{{forloop.counter}}s;">
+
+								<div class="btn-top-navigation" style="color: white;">
+									<div class="clippy1">
+										<div class="inner-clip">
+											{% if service.icon %}
+											<i class="material-icons md-4em col-white;" style="margin-top: 10px; border-radius: 50%; border: 8px dotted white; border-style: dashed dotted dotted dotted; padding: 20px;">{{service.icon.text}}</i>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+								<div class="btn-bottom-navigation">
+									<h4 class="col-black center">{{service.name}}</h4>
+								</div>
+							</div>
+						</a>
+						{% empty%}
+						There are no services here at this time.
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+<div class="container">
+<div class="row">
+<div class="col-md-10 col-md-offset-1">
+
+
+<br /><br /><br /><br /><br /><br /><br />
 
 <div class="row">
 <h3 style="font-weight: 400" class="txt-caps">Circles</h3>

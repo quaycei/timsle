@@ -142,7 +142,7 @@ animateValue("value", 100, 25, 2000);
 
 
 <div class="no-page-dots">
-<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0;  color: black; position: relative;  {% if circle %}background-color: white; {% elif project %}background-color: {{project.palette.accent_color_dark}}; color: white;{% else %}background-color: #3F51B5; color: white;{% endif%} ">
+<nav  id="nav" class="navbar-static-top animated slideInDown" style="padding: 10px; border-radius: 0;  color: black; position: relative;  {% if circle %}background-color: white; {% elif project %}background-color: {{project.palette.accent_color_dark}}; color: white;{% elif registry %}background-color: {{registry.palette.accent_color_dark}}; color: white;{% else %}background-color: #3F51B5; color: white;{% endif%} ">
 <div class="main-carousel" data-flickity='{ "cellAlign": "left", "dragThreshold": 3}'>
 
 
