@@ -60,11 +60,13 @@ def registry_dashboard(request, registry_id):
 	contacts = registry.contact_set.all()
 	circles = registry.circle_set.all()
 	services = registry.services.all()
+	projects = registry.project_set.all()
 
 	return render(request, 'registry/dashboard.html', {
 		'registry':registry,
 		'services':services,
 		'circles':circles,
+		'projects':projects,
 		'contacts':contacts,
 		})
 
@@ -89,7 +91,7 @@ def contact_create(request, registry_id):
 			contact.save()
 			messages.success(request, 'You created a new contact')
                 
-			return redirect(registry_list)
+			return redirect('pregistry_dashboard', registry_id=registry.id)
     
 	return render(request, 'contact/update.html', {'form': contactform})
 

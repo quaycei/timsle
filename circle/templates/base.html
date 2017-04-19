@@ -150,12 +150,12 @@ animateValue("value", 100, 25, 2000);
 
 
 <div class="carousel-cell-nav-nav">
+{% if circle %}<a href="{% url 'circle_list' circle_id=circle.id %}">{% endif %}
 <div class="btn-main-0" style="animation-delay: 1.5s; padding: 20px">
-<h4 class="inline txt-caps " style="line-height: 10px;"><b>{% if circle.name %}{{circle.name }}{% else %}TIMSLE{% endif %}</b></h4>
+<h4 class="inline txt-caps " style="line-height: 10px; color: black;">{% if circle.name %}<b>{{circle.name }}</b>{% elif registry %}<b class="col-white">Timsle</b> <b class="col-white" style="font-weight: 400;">Registry</b>{% else %}<b class="col-white">TIMSLE</b>{% endif %}</h4>
 </div>
-</a>
+{% if circle %}</a>{% endif %}
 </div>
-
 
 
 
@@ -214,6 +214,9 @@ animateValue("value", 100, 25, 2000);
 
 {% block content %}
 {% endblock %}
+
+
+
 </div>
 </div>
 

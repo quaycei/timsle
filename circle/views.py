@@ -7,6 +7,7 @@ from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from pact.models import Pact, Buddy, Checkin
 from circle.forms import CircleForm, ProjectForm
+from registry import views
 
 
 @verified_email_required
@@ -84,10 +85,12 @@ def project_create(request, registry_id):
 			project.creator = request.user
 			project.registry = registry
 			project.verification = registry.verification
+			project.palette = registry.palette
+			project.verification = registry.verification
 			project.save()
 			messages.success(request, 'You created a new project')
                 
-			return redirect(registry_list)
+			return redirect('project_read', project_id=project.id)
     
 	return render(request, 'project/update.html', {'form': projectform})
 
@@ -103,7 +106,7 @@ def project_update(request, project_id):
 			project.save()
 			messages.success(request, 'You updated this project')
                 
-			return redirect(registry_list)
+			return redirect('project_read', project_id=project.id)
     
 	return render(request, 'project/update.html', {
 		'project':project,
@@ -121,10 +124,11 @@ def circle_create(request, registry_id):
 			circle = circleform.save(commit=False)
 			circle.creator = request.user
 			circle.registry = registry
+			circle.palette = registry.palette
 			circle.verification = registry.verification
 			circle.save()
 			messages.success(request, 'You created a new circle')
-			return redirect(circle_list)
+			return redirect('circle_list', circle_id=circle.id)
                 
 	else:
 		circleform = CircleForm()
@@ -142,12 +146,12 @@ def circle_update(request, circle_id):
 	circleform = CircleForm(instance=circle)
 
 	if request.method == 'POST':
-		circleform = CircleForm(request.POST)
+		circleform = CircleForm(request.POST, instance=circle)
 		if circleform.is_valid():
 			circle.save()
 			messages.success(request, 'You updated this circle')
                 
-			return redirect(registry_list)
+			return redirect('circle_list', circle_id=circle.id)
     
 	return render(request, 'circle/update.html', {
 		'circle':circle,

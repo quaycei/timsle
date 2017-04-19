@@ -2,8 +2,11 @@ from django import template
 from django.shortcuts import redirect, render
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
-
+from django.contrib import messages
 from circle.models import Circle, Link, Project, Content
+from circle.forms import CircleForm
+from registry import views 
+from registry.models import Registry
 
 
 register = template.Library()
@@ -55,8 +58,6 @@ def group_panel(group_slug):
         'circles':circles,
         'projects':projects,
         }
-
-
 
 
 

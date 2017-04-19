@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.validators import validate_slug
 from django.contrib.contenttypes.fields import GenericRelation
 from palette.models import Palette, Element
 
@@ -45,10 +44,9 @@ class Circle(models.Model):
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
-    slug = models.CharField(max_length=21, null=True, blank=True, unique=True, validators=[validate_slug])
-    name = models.CharField(max_length=50)
     icon = models.ForeignKey(Element, null=True, blank=True, default=None)
     contact = models.ForeignKey(Contact, null=True, blank=True, default=None)
+    name = models.CharField(max_length=50)
     tagline = models.CharField(max_length=140, default=None, blank=True)
     description = models.TextField(max_length=140, default=None, blank=True)
 

@@ -1,24 +1,37 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<style>
+body { 
+background-color: {{project.palette.background_color}};
+background-color: {{palette.background_color}};}
+</style>
 
 
-
-<h1> {% if project %} Update Project {% else %} Create a new Project {% endif %} </h1>
-
+<br />
+<br /><br />
+<div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
+<div class="form-holder animated zoomIn" >
+<h2 style="font-weight: 300;">&nbsp {% if project %}Update this Project {% else %} Create a Project {% endif %}</h2>
+<h4><b>&nbsp &nbsp{{project.name}}</b></h4> <br />
     <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+          {% for field in form %}
+          <div class="col-md-6" style="padding: 0;">
+          <div class="linesform" >
+          {{field.label}}<br />
+          {% render_field field class+="field1" %}<br />
+
+
+</div>
+</div>
+  {% endfor %}
+  <div class="row" style="padding: 5px;">
+        <button type="submit" class="btn" style="margin-bottom: -40px; margin-top: 20px; border-radius: 0 0 6px 6px; font-size: 1.5em; width: 100%; padding: 10px; background-color: {{registry.palette.accent_color_dark}}; background-color: {{project.palette.accent_color_dark}};"><b class="col-white">Save</b></button>
+        </div>
     </form>
-
-
+</div>
+</div>
 {% endblock %}
-
