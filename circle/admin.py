@@ -1,6 +1,7 @@
 from django.contrib import admin
-from circle.models import Circle, Link, Project, Content, Guideline
+from circle.models import Tag, Circle, Link, Project, Content, Guideline
 
+admin.site.register(Tag)
 admin.site.register(Circle)
 admin.site.register(Link)
 admin.site.register(Project)

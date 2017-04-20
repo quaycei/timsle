@@ -35,6 +35,12 @@ RANK_TYPES = (
     )
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    related_tag = models.ManyToManyField('self', blank=True, default=None)
+
+    def __str__(self):
+        return self.name 
 
 class Circle(models.Model):
     registry = models.ForeignKey(Registry, default=None)
@@ -49,6 +55,7 @@ class Circle(models.Model):
     name = models.CharField(max_length=50)
     tagline = models.CharField(max_length=140, default=None, blank=True)
     description = models.TextField(max_length=140, default=None, blank=True)
+    tag = models.ManyToManyField(Tag, blank=True, default=None)
 
 
     def __str__(self):
