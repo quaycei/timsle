@@ -25,7 +25,7 @@ def content_slip(content_id):
 def portal_slip(circle_id, link_id):
     circle = Circle.objects.get(id=circle_id)
     link = Link.objects.get(id=link_id)
-    child_circles = link.parent.all()
+    child_circles = link.options.all()
 
 
     return {

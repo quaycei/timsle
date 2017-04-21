@@ -61,6 +61,7 @@ def registry_dashboard(request, registry_id):
 	circles = registry.circle_set.all()
 	services = registry.services.all()
 	projects = registry.project_set.all()
+	links = registry.link_set.all()
 
 	return render(request, 'registry/dashboard.html', {
 		'registry':registry,
@@ -68,6 +69,7 @@ def registry_dashboard(request, registry_id):
 		'circles':circles,
 		'projects':projects,
 		'contacts':contacts,
+		'links':links,
 		})
 
 

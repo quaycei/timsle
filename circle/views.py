@@ -6,7 +6,7 @@ from allauth.account.decorators import verified_email_required
 from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from pact.models import Pact, Buddy, Checkin
-from circle.forms import CircleForm, ProjectForm
+from circle.forms import CircleForm, ProjectForm, LinkForm
 from registry import views
 
 
@@ -157,3 +157,52 @@ def circle_update(request, circle_id):
 		'circle':circle,
 		'form': circleform,
 		})
+
+
+
+@verified_email_required
+def link_create(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	linkform = LinkForm()
+
+	if request.method == 'POST':
+		linkform = LinkForm(request.POST)
+		if linkform.is_valid():
+			link = linkform.save(commit=False)
+			link.creator = request.user
+			link.registry = registry
+			link.verification = registry.verification
+			link.save()
+			linkform.save_m2m()
+			messages.success(request, 'You created a new link')
+			return redirect('circle_list', circle_id=link.circle.id)
+                
+	else:
+		linkform = LinkForm()
+
+    
+	return render(request, 'link/update.html', {'form': linkform})
+
+
+
+
+
+@verified_email_required
+def link_update(request, link_id):
+	link = Link.objects.get(id=link_id)
+	linkform = LinkForm(instance=link)
+
+	if request.method == 'POST':
+		linkform = LinkForm(request.POST, instance=link)
+		if linkform.is_valid():
+			link.save()
+			linkform.save()
+			messages.success(request, 'You updated this link')
+                
+			return redirect('circle_list', circle_id=link.circle.id)
+    
+	return render(request, 'link/update.html', {
+		'link':link,
+		'form': linkform,
+		})
+

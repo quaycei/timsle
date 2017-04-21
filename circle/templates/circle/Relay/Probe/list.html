@@ -1,57 +1,32 @@
 {% load circletags %}
 
 <style>
-body { background-color: {{circle.palette.background_color}};}
+	body { background-color: {{circle.palette.background_color}};}
 </style>
 
-	
-	<div class="container-fluid" style="background-color: {{circle.palette.background_color}};">
-		<div class="row ">
-			<div class="container">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
-<div class="row">
-<div class="col-sm-7">
-				<div class="chat-holder animated zoomIn">
-				<i class="material-icons col-white">chat</i>
-<h4 class="col-white">{{circle.tagline}}</h4>
-<p class="col-white">{{circle.description}}</p>
-</div>
-				</div>
-				</div>
-					<div class="question-holder animated fadeInDown">
-						<i class="fa fa-spin  col-white fa-circle-o-notch"></i>&nbsp
-						<h4 class="inline col-white" style="margin-left: 10px; "><h3 class="inline col-white" style="font-weight: 300;">{{circle.directional_question}}</h3></h4>
-					</div>
-					<br />
-					<div class="row">
-						{% for circle in child_circles %}
-						<a href="{% url 'circle_list' circle_id=circle.id %}">
-							<div class="col-sm-4 animated zoomIn" style="padding: 6px; animation-delay: 0.5{{forloop.counter}}s;">
 
-								<div class="btn-top-navigation" style="color: white;">
-									<div class="clippy1">
-										<div class="inner-clip">
-											{% if circle.icon %}
-											<i class="material-icons md-4em col-white;" style="margin-top: 10px; border-radius: 50%; border: 8px dotted white; border-style: dashed dotted dotted dotted; padding: 20px;">{{circle.icon.text}}</i>
-											{% endif %}
-										</div>
-									</div>
-								</div>
-								<div class="btn-bottom-navigation">
-									<h4 class="col-black center">{{circle.name}}</h4>
-								</div>
-							</div>
-						</a>
-						{% empty%}
-						There are no circles here at this time.
-						{% endfor %}
+<div class="container-fluid" style="background-color: {{circle.palette.background_color}};">
+	<div class="row ">
+		<div class="container">
+			<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
+				<div class="row">
+					<div class="col-sm-7">
+						<div class="chat-holder animated zoomIn">
+							<i class="material-icons col-white">chat</i>
+							<h4 class="col-white">{{circle.tagline}}</h4>
+							<p class="col-white">{{circle.description}}</p>
+						</div>
 					</div>
 				</div>
+
+			
 			</div>
+
+
+			{% for link in links %}
+			{% portal_slip circle_id=circle.id link_id=link.id %}
+			{% endfor %}
+
 		</div>
 	</div>
-
-
-	{% for project in projects %}
-	{% project_slip project_id=project.id %}
-	{% endfor %}
+</div>

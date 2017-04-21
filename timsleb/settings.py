@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'djstripe',
+    'timsle',
     'palette',
     'registry',
     'circle',

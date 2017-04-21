@@ -49,6 +49,9 @@
 						<a href="#panel-991409" data-toggle="tab">Circles</a>
 					</li>
 					<li>
+						<a href="#panel-91872913" data-toggle="tab">Links</a>
+					</li>
+					<li>
 						<a href="#panel-918729" data-toggle="tab">Projects</a>
 					</li>
 					<li>
@@ -94,6 +97,38 @@ There are no circles associated with this registry yet.
 
 
 					</div>
+					<div class="tab-pane animated zoomIn" id="panel-91872913">
+
+
+<div class="row">
+<h3 style="font-weight: 400" class="txt-caps">Links</h3>
+<h4 style="font-weight: 300">Use links to help your audience find exactly what they are looking for.</h4><br />
+{% for link in links %}
+<div class="{% cycle 'line1' 'line2' %}">
+<div class="row lines" >
+<div class="col-sm-3">
+<h4> {{ link.name }}</h4>
+</div>
+<div class="col-sm-3">
+{{ link.circle }}
+
+</div>
+<div class="col-sm-3">
+
+</div>
+<div class="col-sm-3">
+<a target="_blank"  href="{% url 'link_update' link_id=link.id %}" class="btn btn-default btn-sm">UPDATE</a>
+<a target="_blank"  href="{% url 'circle_list' circle_id=link.circle.id %}" class="btn btn-default btn-sm">VIEW</a>
+</div>
+</div>
+</div>
+{% empty %}
+There are no Links associated with this registry yet.
+{% endfor %}
+<br />
+<a href="{% url 'link_create' registry_id=registry.id %}" class="btn-default btn">Add Link</a>
+</div>
+</div>
 					<div class="tab-pane animated zoomIn" id="panel-918729">
 
 

@@ -63,12 +63,14 @@ class Circle(models.Model):
 
 
 class Link(models.Model):
+    creator = models.ForeignKey(User, default=None)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False, null=True)
     registry = models.ForeignKey(Registry, default=None)
     circle = models.ForeignKey(Circle, default=None)
     connection_type = models.IntegerField(choices=CONNECTION_TYPES,default=0)
     verification = models.IntegerField(choices=VERIFICATION,default=1)
     name = models.CharField(max_length=21)
-    parent = models.ManyToManyField('Circle', related_name='parents', default=None, blank=True)
+    options = models.ManyToManyField('Circle', related_name='parents', default=None, blank=True)
     directional_question = models.CharField(max_length=140, null=True, default="What would you like to do?", blank=True,)
 
     def __str__(self):

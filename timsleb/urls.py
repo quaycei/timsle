@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^c/', include('circle.urls')),
     url(r'^r/', include('registry.urls')),
     url(r'^p/', include('pact.urls')),
+    url(r'^t/', include('timsle.urls')),
 
 ]

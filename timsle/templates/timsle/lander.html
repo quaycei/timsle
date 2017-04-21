@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load circletags %}
+
+{% block content %}
+
+<style>
+body {background-color: #3F51B5 ;}
+nav {display: none}
+
+.brand-line {
+	width: 20px;
+background-color: white;
+border-radius: 30px;
+display: inline-block;
+margin-left: 8px;
+}
+
+
+{% for line in lines %}
+.line-{{forloop.counter}} {
+	height: {{line.height}}px;
+	margin-bottom: {{line.drop}}px;
+	
+	}
+{% endfor %}
+
+
+</style>
+
+
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<div class="animated fadeOut center " style="animation-delay: 2.3s; margin-top: 150px; position: fixed;">
+	<div class="animated zoomIn">
+<div style="margin-left: 60px;">
+
+{% for line in lines %}
+<div class="brand-line line-{{forloop.counter}} animated fadeInLeft fadeOutRight infinite" style="animation-delay: 0.{{forloop.counter}}s; animation-timing-function: ease-in-out;"></div>
+{% endfor %}
+</div>
+	</div>
+</div>
+
+{% endblock %}
+
