@@ -2,7 +2,7 @@
 	<div class="container-fluid" style="background-color: {{link.circle.palette.background_color}}; z-index: 1;">
 		<div class="row ">
 			<div class="container">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-1 padding-y-60">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-1 {% if circle.rank == 0 %}padding-y-60{% endif %}">
 				<div class="row">
 				<div class="col-sm-8" style="padding:0">
 					<div class="question-holder">
