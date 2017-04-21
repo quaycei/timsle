@@ -93,7 +93,7 @@ def contact_create(request, registry_id):
 			contact.save()
 			messages.success(request, 'You created a new contact')
                 
-			return redirect('pregistry_dashboard', registry_id=registry.id)
+			return redirect('registry_dashboard', registry_id=registry.id)
     
 	return render(request, 'contact/update.html', {'form': contactform})
 
