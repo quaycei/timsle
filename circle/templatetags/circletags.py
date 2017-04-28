@@ -4,7 +4,7 @@ from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from django.contrib import messages
 from circle.models import Circle, Link, Project, Content
-from circle.forms import CircleForm
+from circle.forms import CircleForm, CircleStartForm
 from registry import views 
 from registry.models import Registry
 

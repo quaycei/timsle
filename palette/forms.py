@@ -5,7 +5,13 @@ from palette.models import Palette
 
 
 
+class PaletteStartForm(forms.ModelForm):
+	class Meta:
+		model = Palette
+		exclude = ['creator', 'created_at',]
+
+
 class PaletteForm(forms.ModelForm):
 	class Meta:
 		model = Palette
-		exclude = ['creator', 'created_at','registry',]
+		exclude = ['creator', 'created_at',]

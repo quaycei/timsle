@@ -6,7 +6,7 @@ from allauth.account.decorators import verified_email_required
 from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from pact.models import Pact, Buddy, Checkin
-from circle.forms import CircleForm, ProjectForm, LinkForm
+from circle.forms import CircleForm, CircleStartForm, ProjectForm, LinkForm
 from registry import views
 
 
@@ -114,28 +114,143 @@ def project_update(request, project_id):
 		})
 
 @verified_email_required
-def circle_create(request, registry_id):
+def circle_create_user(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
-	circleform = CircleForm()
+	circles = registry.circle_set.all().filter(group=0).order_by('-created_at')
+	circlestartform = CircleStartForm()
 
 	if request.method == 'POST':
-		circleform = CircleForm(request.POST)
-		if circleform.is_valid():
-			circle = circleform.save(commit=False)
+		circlestartform = CircleStartForm(request.POST)
+		if circlestartform.is_valid():
+			circle = circlestartform.save(commit=False)
+			circle.group = 0
 			circle.creator = request.user
 			circle.registry = registry
 			circle.palette = registry.palette
 			circle.verification = registry.verification
 			circle.save()
 			messages.success(request, 'You created a new circle')
-			return redirect('circle_list', circle_id=circle.id)
+			return redirect('circle_create_user', 
+				registry_id=registry.id
+				)
                 
 	else:
-		circleform = CircleForm()
+		circlestartform = CircleStartForm()
 
     
-	return render(request, 'circle/update.html', {'form': circleform})
+	return render(request, 'circle/create_user.html', {
+		'registry':registry,
+		'form': circlestartform,
+		'circles':circles,
+	})
 
+
+@verified_email_required
+def circle_create_offering(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
+	circles = registry.circle_set.all().filter(group=1).order_by('-created_at')
+	circlestartform = CircleStartForm()
+
+	if request.method == 'POST':
+		circlestartform = CircleStartForm(request.POST)
+		if circlestartform.is_valid():
+			circle = circlestartform.save(commit=False)
+			circle.group = 1
+			circle.creator = request.user
+			circle.registry = registry
+			circle.palette = registry.palette
+			circle.verification = registry.verification
+			circle.save()
+			messages.success(request, 'You created a new circle')
+			return redirect('circle_create_offering', 
+				registry_id=registry.id,
+				circle_id=circle.id,
+				)
+                
+	else:
+		circlestartform = CircleStartForm()
+
+    
+	return render(request, 'circle/create_offering.html', {
+		'registry':registry,
+		'form': circlestartform,
+		'circles':circles,
+		'users':users,
+	})
+
+
+@verified_email_required
+def circle_create_need(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	circles = registry.circle_set.all()
+	circlestartform = CircleStartForm()
+
+	if request.method == 'POST':
+		circlestartform = CircleStartForm(request.POST)
+		if circlestartform.is_valid():
+			circle = circlestartform.save(commit=False)
+			circle.creator = request.user
+			circle.registry = registry
+			circle.palette = registry.palette
+			circle.verification = registry.verification
+			circle.save()
+			messages.success(request, 'You created a new circle')
+			return redirect('circle_create_need', 
+				registry_id=registry.id,
+				circle_id=circle.id,
+				)
+                
+	else:
+		circlestartform = CircleStartForm()
+
+    
+	return render(request, 'circle/create.html', {
+		'registry':registry,
+		'form': circlestartform,
+		'circles':circles,
+	})
+
+
+
+
+@verified_email_required
+def circle_create_types(request, registry_id, circle_id):
+	registry = Registry.objects.get(id=registry_id)
+	circles = registry.circle_set.all()
+	circlestartform = CircleStartForm()
+	parent_circle = Circle.objects.get(id=circle_id)
+
+	if request.method == 'POST':
+		circlestartform = CircleStartForm(request.POST)
+		if circlestartform.is_valid():
+			circle = circlestartform.save(commit=False)
+			circle.creator = request.user
+			circle.registry = registry
+			circle.palette = registry.palette
+			circle.verification = registry.verification
+			circle.save()
+			link = Link(registry=registry, creator=request.user, verification=registry.verification)
+			link.save()
+			link.circle = parent_circle
+			link.options.add(circle)
+			link.save()
+			messages.success(request, 'You created a new circle')
+			return redirect('circle_create_types', 
+				registry_id=registry.id,
+			 	circle_id=circle.id,
+			 	)
+                
+	else:
+		circlestartform = CircleStartForm()
+
+    
+	return render(request, 'circle/update.html', {
+		'parent_circle':parent_circle,
+		'registry':registry,
+		'form': circlestartform,
+		'circles':circles,
+	})
 
 
 
@@ -163,6 +278,7 @@ def circle_update(request, circle_id):
 @verified_email_required
 def link_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
+	link = models.Link(id=id, creator=request.user, )
 	linkform = LinkForm()
 
 	if request.method == 'POST':
@@ -181,7 +297,10 @@ def link_create(request, registry_id):
 		linkform = LinkForm()
 
     
-	return render(request, 'link/update.html', {'form': linkform})
+	return render(request, 'link/update.html', {
+		'registry':registry,
+		'form': linkform,
+		})
 
 
 

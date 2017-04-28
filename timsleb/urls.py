@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^r/', include('registry.urls')),
     url(r'^p/', include('pact.urls')),
     url(r'^t/', include('timsle.urls')),
+    url(r'^palette/', include('palette.urls')),
 
 ]

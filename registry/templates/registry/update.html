@@ -3,34 +3,52 @@
 
 {% block content %}
 
-<style>
-body { 
-background-color: {{registry.palette.background_color}};
-background-color: {{palette.background_color}};}
-</style>
+
 
 
 <br />
 <br /><br />
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="form-holder animated zoomIn" >
-<h2 style="font-weight: 300;">&nbsp {% if registry %}Update this Registry {% else %} Create a Registry {% endif %}</h2>
-<h4><b>&nbsp &nbsp{{registry.name}}</b></h4> <br />
+<div class="animated slideInUp" >
+
     <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
-          {% for field in form %}
-          <div class="col-md-6" style="padding: 0;">
-          <div class="linesform" >
-          {{field.label}}<br />
-          {% render_field field class+="field1" %}<br />
+                    {% for field in form %}
+     
+          {% render_field field class+="hidden" %}<br />
+
+{% endfor %}
 
 
-</div>
-</div>
-  {% endfor %}
-  <div class="row" style="padding: 5px;">
-        <button type="submit" class="btn" style="margin-bottom: -40px; margin-top: 20px; border-radius: 0 0 6px 6px; font-size: 1.5em; width: 100%; padding: 10px; background-color: {{registry.palette.accent_color_dark}}; background-color: {{registry.palette.accent_color_dark}};"><b class="col-white">Save</b></button>
-        </div>
+{% if not registry.name %}
+<h4 class="field-label">What is the name of your organization?</h4>
+          {% render_field form.name class+="field1" placeholder="Timsle Foundation"%}<br /><br />
+          <button class="btn btn-default" type="submit">Continue </button>
+
+<br /><br />
+{% endif %}
+
+{% if registry.name and not registry.mission %}
+<h4 class="field-label">What {{registry.name}}'s mission?</h4>
+          {% render_field form.mission class+="field1" placeholder="Timsle Foundation"%}<br /><br />
+          <button class="btn btn-default" type="submit">Continue </button>
+
+
+<br /><br />
+{% endif %}
+
+{% if registry.mission and not registry.mission_why %}
+"{{registry.mission}}"
+<h4 class="field-label">Why does {{registry.name}} do this?</h4>
+          {% render_field form.mission_why class+="field1" placeholder="Timsle Foundation"%}<br /><br />
+          <button class="btn btn-default" type="submit">Continue </button>
+
+{% endif %}
+
+{% if registry.mission_why %}
+<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="btn btn-default">Return</a>
+<a href="{% url 'palette_create' registry_id=registry.id %}" class="btn btn-default">Add Color</a>
+{% endif %}
     </form>
 </div>
 </div>

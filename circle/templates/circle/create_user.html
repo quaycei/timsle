@@ -6,18 +6,20 @@
 <style>
 body { 
 background-color: white;
+}
+nav {display: none;}
 </style>
 
 
 <br />
 <br /><br />
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="form-holder animated fadeIn" >
+<div class="form-holder animated" >
 <div class="row" style="padding: 20px;">
 
 <div class="col-xs-12">
-<h1 style="font-weight: 200; display: inline-block;" >Who</h1>
-<a href="{% url 'registry_dashboard' registry_id=circle.registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
+<h1 style="font-weight: 200; display: inline-block;" >Users</h1>
+<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
 </div>
     <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
@@ -46,10 +48,7 @@ background-color: white;
 </div>
 
   
-          {% if circle %}
-                  <br /><br />
-          <a href="{% url 'circle_create' registry_id=registry.id %}" class="btn-default btn">Continue</a>
-{% endif %}
+
 </div>
 <br /><br />
 <div class="col-xs-12">
@@ -71,6 +70,9 @@ background-color: white;
 
 
     </form>
+    <br />    <br />    <br />
+<a href="{% url 'circle_create_offering' registry_id=registry.id %}" class="btn btn-default">Continue </a>
+
 </div>
 </div>
 {% endblock %}

@@ -26,19 +26,6 @@ VERIFICATION = (
     )
 
 
-class Services(models.Model):
-    name = models.CharField(max_length=25)
-    verification = models.IntegerField(choices=VERIFICATION, default=0)
-    status = models.IntegerField(choices=STATUS, default=0)
-    icon = models.ForeignKey('palette.Element', null=True, blank=True, default=None)
-    service_url = models.CharField(max_length=140, default=None, blank=True, null=True)
-    service_label = models.CharField(max_length=140, default=None, blank=True, null=True)
-    description = models.TextField(max_length=250, default=None)
-
-    def __str__(self):
-        return self.name 
-
-
 
 
 class Registry(models.Model):
@@ -47,8 +34,8 @@ class Registry(models.Model):
     verification = models.IntegerField(choices=VERIFICATION, default=0)
     status = models.IntegerField(choices=STATUS, default=0)
     name = models.CharField(max_length=50)
-    mission = models.TextField(max_length=250, default=None)
-    services = models.ManyToManyField(Services, blank=True)
+    mission = models.TextField(max_length=250, default=None, blank=True, null=True)
+    mission_why = models.TextField(max_length=250, default=None, blank=True, null=True)
     palette = models.ForeignKey('palette.Palette', blank=True, null=True, default=None)
 
 

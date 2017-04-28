@@ -6,18 +6,20 @@
 <style>
 body { 
 background-color: white;
+}
+nav {display: none;}
 </style>
 
 
 <br />
 <br /><br />
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="form-holder animated fadeIn" >
+<div class="form-holder animated" >
 <div class="row" style="padding: 20px;">
 
 <div class="col-xs-12">
-<h1 style="font-weight: 200; display: inline-block;" >Who</h1>
-<a href="{% url 'registry_dashboard' registry_id=circle.registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
+<h1 style="font-weight: 200; display: inline-block;" >Offering</h1>
+<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
 </div>
     <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
@@ -28,15 +30,13 @@ background-color: white;
 
           <div class="col-md-8" style="padding: 0;">
           <div class="linesform" >
-{% if parent_circle %}
-<h4 class="field-label">Are there specific groups of <div class="tag" style="padding: 5px;"><b>{{parent_circle.name}}</b></div> that may have different needs?</h4>
-{% else %}
-<h4 class="field-label">Add each group of people that will access your site.</h4><br />
-{% endif %}
+
+<h4 class="field-label">Add anything that {{registry.name}} offers to help people {{registry.mission}}</h4><br />
+
 <div class="row">
 <div class="col-md-8 col-sm-12">
     <div class="input-group input-group-lg">
-      {% render_field form.name class+="form-control" placeholder="Students"%}
+      {% render_field form.name class+="form-control" placeholder="Running sessions"%}
       <span class="input-group-btn">
         <button class="btn " type="submit" style="background-color: {{registry.palette.accent_color_dark}};">
         	<i class="material-icons col-white" style="display: inline-block; ">add</i></button>
@@ -46,10 +46,7 @@ background-color: white;
 </div>
 
   
-          {% if circle %}
-                  <br /><br />
-          <a href="{% url 'circle_create' registry_id=registry.id %}" class="btn-default btn">Continue</a>
-{% endif %}
+
 </div>
 <br /><br />
 <div class="col-xs-12">

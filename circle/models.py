@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from palette.models import Palette, Element
 
+
 from registry.models import Registry, Contact
 
 STATUS = (
@@ -34,6 +35,11 @@ RANK_TYPES = (
         (4, 'Mothership'),
     )
 
+GROUP = (
+        (0, 'User'),
+        (1, 'Offering'),
+        (2, 'Need'),
+    )
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -43,6 +49,7 @@ class Tag(models.Model):
         return self.name 
 
 class Circle(models.Model):
+    group = models.IntegerField(choices=GROUP,default=0)
     registry = models.ForeignKey(Registry, default=None)
     rank = models.IntegerField(choices=RANK_TYPES,default=0)
     verification = models.IntegerField(choices=VERIFICATION,default=0)
@@ -53,9 +60,9 @@ class Circle(models.Model):
     icon = models.ForeignKey(Element, null=True, blank=True, default=None)
     contact = models.ForeignKey(Contact, null=True, blank=True, default=None)
     name = models.CharField(max_length=50)
-    tagline = models.CharField(max_length=140, default=None, blank=True)
-    description = models.TextField(max_length=140, default=None, blank=True)
-    tag = models.ManyToManyField(Tag, blank=True, default=None)
+    tagline = models.CharField(max_length=140, default=None, blank=True, null=True)
+    description = models.TextField(max_length=140, null=True, default=None, blank=True)
+
 
 
     def __str__(self):
@@ -66,15 +73,13 @@ class Link(models.Model):
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False, null=True)
     registry = models.ForeignKey(Registry, default=None)
-    circle = models.ForeignKey(Circle, default=None)
+    circle = models.ForeignKey(Circle, default=None, blank=True, null=True)
     connection_type = models.IntegerField(choices=CONNECTION_TYPES,default=0)
     verification = models.IntegerField(choices=VERIFICATION,default=1)
-    name = models.CharField(max_length=21)
+    name = models.CharField(max_length=21, default=None, blank=True, null=True)
     options = models.ManyToManyField('Circle', related_name='parents', default=None, blank=True)
     directional_question = models.CharField(max_length=140, null=True, default="What would you like to do?", blank=True,)
 
-    def __str__(self):
-        return self.name 
 
 class Project(models.Model):
     registry = models.ForeignKey(Registry, default=None)

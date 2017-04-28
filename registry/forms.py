@@ -4,11 +4,17 @@ from django import forms
 from registry.models import Registry, Contact
 
 
+class RegistryStartForm(forms.ModelForm):
+	class Meta:
+		model = Registry
+		exclude = ['creator', 'created_at', 'verification', 'status', 'mission', 'mission_why', 'palette',]
+
+
 
 class RegistryForm(forms.ModelForm):
 	class Meta:
 		model = Registry
-		exclude = ['creator', 'created_at', 'verification', 'status','contributors',]
+		exclude = ['creator', 'created_at', 'verification', 'status',]
 
 
 class ContactForm(forms.ModelForm):

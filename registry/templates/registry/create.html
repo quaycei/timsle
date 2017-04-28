@@ -1,25 +1,42 @@
 {% extends 'base.html' %}
-{% load circletags %}
+{% load widget_tweaks %}
 
 {% block content %}
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<style>
+body { 
+background-color: {{registry.palette.background_color}};
+background-color: {{palette.background_color}};}
+</style>
 
 
+<br />
+<br /><br />
+<div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
+<div class="form-holder animated zoomIn" >
 
-
-
-    <form action="{% url 'registry_create' %}" method="post" enctype="multipart/form-data"> 
+<h4><b>&nbsp &nbsp{{registry.name}}</b></h4> <br />
+    <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+
+    {{ form.non_field_errors }}
+    {{form.name.errors }}
+
+
+          <div class="col-md-6" style="padding: 0;">
+          <div class="linesform" >
+
+<h4 class="field-label">What is the name of your organization?</h4>
+          {% render_field form.name class+="field1" placeholder="Timsle Foundation"%}<br /><br />
+          <button class="btn btn-default" type="submit">Continue </button>
+
+
+
+</div>
+</div>
+
+
     </form>
-
-
+</div>
+</div>
 {% endblock %}
-

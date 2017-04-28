@@ -4,8 +4,8 @@ from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
 from allauth.account.decorators import verified_email_required
 from circle.models import Circle, Link, Project, Content, Guideline
-from registry.models import Services, Registry, Contact
-from registry.forms import RegistryForm, ContactForm
+from registry.models import Registry, Contact
+from registry.forms import RegistryForm, RegistryStartForm, ContactForm
 from palette.models import Palette
 
 
@@ -20,19 +20,19 @@ def registry_list(request):
 
 @verified_email_required
 def registry_create(request):
-	registryform = RegistryForm()
+	registrystartform = RegistryStartForm()
 
 	if request.method == 'POST':
-		registryform = RegistryForm(request.POST)
-		if registryform.is_valid():
-			registry = registryform.save(commit=False)
+		registrystartform = RegistryStartForm(request.POST)
+		if registrystartform.is_valid():
+			registry = registrystartform.save(commit=False)
 			registry.creator = request.user
 			registry.save()
 			messages.success(request, 'You created a new Registry')
                 
-			return redirect(registry_list)
+			return redirect('registry_update', registry_id=registry.id)
     
-	return render(request, 'registry/create.html', {'form': registryform})
+	return render(request, 'registry/create.html', {'form': registrystartform})
 
 
 @verified_email_required
@@ -44,9 +44,8 @@ def registry_update(request, registry_id):
 		registryform = RegistryForm(request.POST, instance=registry)
 		if registryform.is_valid():
 			registry.save()
-			messages.success(request, 'You updated this Registry')
                 
-			return redirect(registry_list)
+			return redirect('registry_update', registry_id=registry.id)
     
 	return render(request, 'registry/update.html', {
 		'registry':registry,
@@ -59,19 +58,16 @@ def registry_dashboard(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	contacts = registry.contact_set.all()
 	circles = registry.circle_set.all()
-	services = registry.services.all()
 	projects = registry.project_set.all()
 	links = registry.link_set.all()
 
 	return render(request, 'registry/dashboard.html', {
 		'registry':registry,
-		'services':services,
 		'circles':circles,
 		'projects':projects,
 		'contacts':contacts,
 		'links':links,
 		})
-
 
 
 
