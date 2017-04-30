@@ -31,7 +31,14 @@ nav {display: none;}
           <div class="col-md-8" style="padding: 0;">
           <div class="linesform" >
 
-<h4 class="field-label">Add anything that {{registry.name}} offers to help people {{registry.mission}}</h4><br />
+<h4 class="field-label">Add anything that {{registry.name}} offers to {{registry.mission}}</h4><br />
+{% if not offerings %}
+For example
+{% for guideline in example_offerings %}
+<div class="tag"><b>{{guideline.text}}</b></div>
+{% endfor %}
+{% endif %}
+
 
 <div class="row">
 <div class="col-md-8 col-sm-12">
@@ -48,10 +55,12 @@ nav {display: none;}
   
 
 </div>
+</div>
 <br /><br />
 <div class="col-xs-12">
-{% if circles %}<h5>You've added these groups: </h5>{% endif %}
-{% for circle in circles %}
+<br><br>
+{% if offerings %}<h5>You've added these offerings: </h5>{% endif %}
+{% for circle in offerings %}
 
 <div class="btn-group" style="margin:3px; ">
 <a href="{% url 'circle_list' circle_id=circle.id %}" class="btn" style="padding-top: 2px; padding-bottom:2px; color: white;  background-color: {{registry.palette.accent_color_dark}};height: 40px;"><h5>{{circle.name}}</h5></a>
@@ -64,10 +73,15 @@ nav {display: none;}
 
 
 </div>
-</div>
+
 
 
     </form>
+
+        <br />    <br />    <br />
+    <div class="col-xs-12">
+<a class="btn-continue" href="{% url 'link_create' registry_id=registry.id %}" class="btn btn-default">Continue </a>
+</div>
 </div>
 </div>
 {% endblock %}

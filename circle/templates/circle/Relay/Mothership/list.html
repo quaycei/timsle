@@ -1,0 +1,46 @@
+{% load circletags %}
+
+
+<style>
+	body {background-color: #30373b;}
+
+
+</style>
+
+<br><br>
+<br><br>
+<div class="row">
+	<div class="col-sm-8 col-sm-offset-2 animated slideInRight" >
+		<div style="border-radius: 4px 4px 0 0; background-color: white; padding: 30px;">
+
+<h4 class="txt-caps" style="font-weight: 200;"><b>TIMSLE</b> MAKER</h4>
+			<h1 style="font-weight: 200;">{{circle.tagline}}</h1>
+
+			<br><h4>
+{{circle.description}}			<div class="brick-underline"></div>
+<br><br>
+			<br>
+			
+
+			It's easy to get setup. Simply answer the questions that appear on screen. 
+
+<br>
+
+			</h4>
+
+		</div>
+
+
+
+
+
+		<a href="{% url 'registry_create' %}" class="btn" style="border-radius: 0 0 6px 6px; font-size: 1.5em; width: 100%; padding: 10px; background-color: {{circle.palette.accent_color_dark}}; background-color: {{project.palette.accent_color_dark}};"><b class="col-white">Get started</b></a>
+	</div>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+

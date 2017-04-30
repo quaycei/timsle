@@ -2,6 +2,10 @@
 {% load pacttags %}
 {% block content %}
 
+
+<style>
+body {background-color: #37474F;}
+</style>
 <div class="animated fadeInUp ">
 	
 		
@@ -14,18 +18,13 @@
 
 <div class="col-sm-6 col-lg-8"><br /><br />
 <h4 class="col-white inline txt-caps" ><b>{{ pact.owner }}&nbsp </b> {{pact.content.project.group}}</h4>
-<h1 class="col-white">{{pact.answer }}</h1><br />
-{% if request.user != pact.owner %}
-<a id="modal-{{pact.id}}284195" href="#modal-{{pact.id}}284195" role="button" data-toggle="modal" class="col-white txt-caps btn btn-default">
-    <i class="material-icons">done_all</i><br />Check in
-    </a>
-    {% endif %}
+<h4 class="col-white">{{pact.answer }}</h4><br />
+
 </div>
 
 </div>
 
-
-
+<div class="col-sm-6 col-sm-offset-3 col-lg-4" style="padding:0;">
 <h5 class="col-white txt-caps">Progress</h5>
 <div class="row">
 {% for checkin in checkins %}
@@ -44,7 +43,7 @@ Checked in by {{ checkin.submitted_by }}</p><br /><br />
 {% endfor %}
 
 
-
+</div>
 </div>
 
 {% endblock %}

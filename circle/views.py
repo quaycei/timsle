@@ -61,15 +61,11 @@ def project_read(request, project_id):
 def content_read(request, project_id, content_id):
 	project = Project.objects.get(id=project_id)
 	content = Content.objects.get(id=content_id)
-	guideline_examples = content.guideline_set.all().filter(type_of_guideline=0)
-	guideline_rules = content.guideline_set.all().filter(type_of_guideline=1)
 
 
 	return render(request, 'content/read.html',{
 		'project':project,
 		'content':content,
-		'guideline_examples':guideline_examples,
-		'guideline_rules':guideline_rules,
 		})
 
 
@@ -116,8 +112,9 @@ def project_update(request, project_id):
 @verified_email_required
 def circle_create_user(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
-	circles = registry.circle_set.all().filter(group=0).order_by('-created_at')
+	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
 	circlestartform = CircleStartForm()
+	example_users = Guideline.objects.filter(purpose=3).filter(type_of_guideline=0)
 
 	if request.method == 'POST':
 		circlestartform = CircleStartForm(request.POST)
@@ -141,7 +138,8 @@ def circle_create_user(request, registry_id):
 	return render(request, 'circle/create_user.html', {
 		'registry':registry,
 		'form': circlestartform,
-		'circles':circles,
+		'users': users,
+		'example_users':example_users,
 	})
 
 
@@ -149,7 +147,8 @@ def circle_create_user(request, registry_id):
 def circle_create_offering(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
-	circles = registry.circle_set.all().filter(group=1).order_by('-created_at')
+	offerings = registry.circle_set.all().filter(group=1).order_by('-created_at')
+	example_offerings = Guideline.objects.filter(purpose=2).filter(type_of_guideline=0)
 	circlestartform = CircleStartForm()
 
 	if request.method == 'POST':
@@ -165,7 +164,6 @@ def circle_create_offering(request, registry_id):
 			messages.success(request, 'You created a new circle')
 			return redirect('circle_create_offering', 
 				registry_id=registry.id,
-				circle_id=circle.id,
 				)
                 
 	else:
@@ -175,8 +173,42 @@ def circle_create_offering(request, registry_id):
 	return render(request, 'circle/create_offering.html', {
 		'registry':registry,
 		'form': circlestartform,
-		'circles':circles,
-		'users':users,
+		'offerings':offerings,
+		'example_offerings':example_offerings,
+	})
+
+
+@verified_email_required
+def circle_create_filter(request, registry_id):
+	registry = Registry.objects.get(id=registry_id)
+	filters = registry.circle_set.all().filter(group=3).order_by('-created_at')
+	example_offerings = Guideline.objects.filter(purpose=4).filter(type_of_guideline=0)
+	circlestartform = CircleStartForm()
+
+	if request.method == 'POST':
+		circlestartform = CircleStartForm(request.POST)
+		if circlestartform.is_valid():
+			circle = circlestartform.save(commit=False)
+			circle.group = 3
+			circle.creator = request.user
+			circle.registry = registry
+			circle.palette = registry.palette
+			circle.verification = registry.verification
+			circle.save()
+			messages.success(request, 'You created a new circle')
+			return redirect('circle_create_offering', 
+				registry_id=registry.id,
+				)
+                
+	else:
+		circlestartform = CircleStartForm()
+
+    
+	return render(request, 'circle/create_offering.html', {
+		'registry':registry,
+		'form': circlestartform,
+		'filters':filters,
+		'example_offerings':example_offerings,
 	})
 
 
@@ -278,7 +310,6 @@ def circle_update(request, circle_id):
 @verified_email_required
 def link_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
-	link = models.Link(id=id, creator=request.user, )
 	linkform = LinkForm()
 
 	if request.method == 'POST':

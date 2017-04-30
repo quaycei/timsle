@@ -8,10 +8,10 @@ from palette.models import Palette
 class PaletteStartForm(forms.ModelForm):
 	class Meta:
 		model = Palette
-		exclude = ['creator', 'created_at',]
+		exclude = ['creator', 'created_at', 'name','element',]
 
 
 class PaletteForm(forms.ModelForm):
 	class Meta:
 		model = Palette
-		exclude = ['creator', 'created_at',]
+		exclude = ['creator', 'created_at', 'name',]

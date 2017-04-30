@@ -35,11 +35,22 @@ RANK_TYPES = (
         (4, 'Mothership'),
     )
 
+
+PURPOSE = (
+        (0, 'None'),
+        (1, 'Add Registry'),
+        (2, 'Add Offering'),
+        (3, 'Add User'),
+        (4, 'Add Filter'),
+    )
+
 GROUP = (
         (0, 'User'),
         (1, 'Offering'),
         (2, 'Need'),
+        (3, 'Filter'),
     )
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -48,12 +59,14 @@ class Tag(models.Model):
     def __str__(self):
         return self.name 
 
+
 class Circle(models.Model):
-    group = models.IntegerField(choices=GROUP,default=0)
+    group = models.IntegerField(choices=GROUP,null=True, blank=True, default=0)
     registry = models.ForeignKey(Registry, default=None)
     rank = models.IntegerField(choices=RANK_TYPES,default=0)
     verification = models.IntegerField(choices=VERIFICATION,default=0)
     status = models.IntegerField(choices=STATUS,default=0)
+    purpose = models.IntegerField(choices=PURPOSE,default=0, blank=True, null=True)
     creator = models.ForeignKey(User, default=None)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     palette = models.ForeignKey(Palette, default=None, blank=True, null=True)
@@ -115,6 +128,7 @@ class Content(models.Model):
         (1, 'Challenge'),
         (2, 'Photo'),
         (3, 'Video'),
+        (4, 'Buy'),
     )
     type_of_circle = models.IntegerField(
         choices=TYPE_OF_CONTENT_CHOICES,
@@ -134,8 +148,8 @@ class Content(models.Model):
 
 
 class Guideline(models.Model):
-    registry = models.ForeignKey(Registry, default=None)
-    rank = models.IntegerField(choices=RANK_TYPES,default=3)
+    registry = models.ForeignKey(Registry, default=None, blank=True, null=True)
+    purpose = models.IntegerField(choices=PURPOSE,default=0)
     status = models.IntegerField(
         choices=STATUS,
         default=0,
@@ -151,7 +165,6 @@ class Guideline(models.Model):
         default=0,
     )
     text = models.CharField(max_length=300)
-    content = models.ForeignKey(Content, default=None, blank=False)
 
     def __str__(self):
         return self.text

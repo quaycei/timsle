@@ -1,3 +1,5 @@
+
+
 <script>
 
 var noScroll = document.getElementById('noScroll')
@@ -57,6 +59,13 @@ There are no check-ins yet.
 
 <div class="cell-tray" style="position: fixed; bottom: 0; width: 100%; background-color: white; width:300px;">
 <a href="{% url 'project_read' project_id=pact.content.project.id%}" class="btn btn-explore" style="background-color: {{pact.content.palette.accent_color_dark}}">Explore</a>
+
+<a id="modal-151031" href="#modal-container-151031" role="button" data-toggle="modal" class="btn btn-explore" style="background-color: {{pact.content.palette.accent_color_dark}}">Review</a>
+
+
+<a href="{% url 'pact_read' pact_id=pact.id %}" class="btn btn-default" style="background-color: {{pact.content.palette.accent_color_dark}}">Read</a>
+
+
 </div>
 
 </div>

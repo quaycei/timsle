@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
+{% load palettetags %}
 
 {% block content %}
 
 
 
 
-<br />
-<br /><br />
+
+<br /><br /><br />
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
 <div class="animated slideInUp" >
 
@@ -15,23 +16,22 @@
                       {% csrf_token %}
                     {% for field in form %}
      
-          {% render_field field class+="hidden" %}<br />
-
+          {% render_field field class+="hidden" %}
 {% endfor %}
 
 
 {% if not registry.name %}
 <h4 class="field-label">What is the name of your organization?</h4>
           {% render_field form.name class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
+          <button class="btn btn-continue" type="submit">Continue </button>
 
 <br /><br />
 {% endif %}
 
 {% if registry.name and not registry.mission %}
-<h4 class="field-label">What {{registry.name}}'s mission?</h4>
+<h4 class="field-label">What is the purpose of <div class="tag"><b>{{registry.name}}</b></h4>
           {% render_field form.mission class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
+          <button class="btn btn-continue" type="submit">Continue </button>
 
 
 <br /><br />
@@ -41,14 +41,63 @@
 "{{registry.mission}}"
 <h4 class="field-label">Why does {{registry.name}} do this?</h4>
           {% render_field form.mission_why class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
+          <button class="btn btn-continue" type="submit">Continue </button>
 
 {% endif %}
 
 {% if registry.mission_why %}
-<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="btn btn-default">Return</a>
-<a href="{% url 'palette_create' registry_id=registry.id %}" class="btn btn-default">Add Color</a>
+<style>
+body {background-color: #30373b;}
+</style>
+
+<br />
+<br />
+<br />
+
+
+<div style=" width: 100%; border-radius: 4px; background-color: white;">
+<div class="row">
+<div class="col-md-6">
+<div style="padding: 30px; padding-top: 50px; border-right: 2px solid #e1e1e1; background-color: white;">
+<p class="txt-caps"><b>Organization</b></p>
+<h1 style="font-weight: 300">{{ registry.name }}</h1><br>
+
+{% if registry.mission %}<p class="txt-caps"><b>Purpose</b></p>
+<h3 style="font-weight: 200;">{{ registry.mission }}</h3>{% endif %}
+{% if registry.mission_why %}<br><p class="txt-caps"><b>Mission</b></p>
+<h5 style="font-weight: 200;">{{ registry.mission_why }}
+</h5>{% endif %}
+<br>
+<br>
+
+<div class="verification-{{registry.verification}} inline"></div>
+<br /><br /><br />
+</div>
+</div>
+<div class="col-md-6">
+
+<br><br><br>
+<div class="center animated zoomIn" style="animation-delay: 0.4s; color: #4CAF50; ">
+<i class="material-icons" style="font-size: 6em;">check_circle</i>
+<h4>Success!</h4>
+</div>
+<div class="center">
+<br><br>
+
+
+
+{% palette_create registry_id=registry.id %}
+
+<a href="{% url 'circle_create_user' registry_id=registry.id %}" class="btn" style="border-radius: 2px; padding: 10px; color: white; background-color: {{registry.palette.background_color}}"><b>Continue</b></a>
+
+</div>
+</div>
+</div>
+</div>
+
 {% endif %}
+
+
     </form>
 </div>
 </div>

@@ -17,6 +17,7 @@ def palette_create(request, registry_id):
 		palettestartform = PaletteStartForm(request.POST)
 		if palettestartform.is_valid():
 			palette = palettestartform.save(commit=False)
+			palette.name = registry.name
 			palette.creator = request.user
 			registry.palette = palette
 			palette.save()

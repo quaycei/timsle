@@ -25,16 +25,14 @@ class Element(models.Model):
 
 
 class Palette(models.Model):
-    creator = models.ForeignKey(User, default=None)
+    creator = models.ForeignKey(User, default=None, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    name = models.CharField(max_length=50)
-    background_color = RGBColorField()
-    foreground_color = RGBColorField()
-    accent_color_dark = RGBColorField()
-    accent_color_light = RGBColorField()
+    name = models.CharField(max_length=50, default=None, null=True, blank=True)
+    background_color = RGBColorField(default="#393a46")
+    foreground_color = RGBColorField(default="##9fa8da")
+    accent_color_dark = RGBColorField(default="#4947c1")
+    accent_color_light = RGBColorField(default="#90caf9")
     element = models.ManyToManyField(Element, blank=True, default=None)
 
-    def __str__(self):
-        return self.name
 
 

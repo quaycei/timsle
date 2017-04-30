@@ -6,7 +6,7 @@ from circle.models import Circle, Link, Project, Content, Guideline
 class CircleStartForm(forms.ModelForm):
 	class Meta:
 		model = Circle
-		exclude = ['creator', 'created_at', 'registry', 'verification', 'status', 'palette', 'icon', 'group','contact','tagline', 'description', 'tag', 'rank',]
+		exclude = ['group', 'registry', 'rank', 'verification', 'status', 'purpose', 'creator', 'created_at', 'palette', 'icon', 'contact', 'tagline', 'description',]
 
 class CircleForm(forms.ModelForm):
 	class Meta:

@@ -21,18 +21,21 @@ def registry_list(request):
 @verified_email_required
 def registry_create(request):
 	registrystartform = RegistryStartForm()
+	the_palette = Palette.objects.get(name="Carleton University")
+
 
 	if request.method == 'POST':
 		registrystartform = RegistryStartForm(request.POST)
 		if registrystartform.is_valid():
 			registry = registrystartform.save(commit=False)
 			registry.creator = request.user
+			registry.palette = the_palette
 			registry.save()
 			messages.success(request, 'You created a new Registry')
                 
 			return redirect('registry_update', registry_id=registry.id)
     
-	return render(request, 'registry/create.html', {'form': registrystartform})
+	return render(request, 'registry/create.html', {'form': registrystartform, 'the_palette':the_palette})
 
 
 @verified_email_required

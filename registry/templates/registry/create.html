@@ -7,13 +7,15 @@
 body { 
 background-color: {{registry.palette.background_color}};
 background-color: {{palette.background_color}};}
+
+
 </style>
 
 
 <br />
-<br /><br />
+
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="form-holder animated zoomIn" >
+<div class="form-holder animated fadeInUp" >
 
 <h4><b>&nbsp &nbsp{{registry.name}}</b></h4> <br />
     <form method="post" enctype="multipart/form-data"> 
@@ -23,12 +25,21 @@ background-color: {{palette.background_color}};}
     {{form.name.errors }}
 
 
-          <div class="col-md-6" style="padding: 0;">
           <div class="linesform" >
-
+<h1 style="font-weight: 200">Register</h1>
+<br>
 <h4 class="field-label">What is the name of your organization?</h4>
-          {% render_field form.name class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
+<div class="row">
+<div class=" col-sm-12">
+    <div class="input-group input-group-lg">
+      {% render_field form.name class+="form-control" placeholder="Timsle Foundation"%}
+      <span class="input-group-btn">
+        <button class="btn " type="submit" style="background-color: #3f51b5;">
+        	<i class="material-icons col-white" style="display: inline-block; ">arrow_forward</i></button>
+      </span>
+    </div><!-- /input-group -->
+</div>
+</div>
 
 
 

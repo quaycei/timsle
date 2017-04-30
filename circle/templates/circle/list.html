@@ -1,3 +1,5 @@
+
+
 <!-- CIRCLE/LIST -->
 {% extends 'base.html' %}
 {% load circletags %}
@@ -9,7 +11,12 @@
 {% include 'circle/Relay/Probe/list.html' %}
 {% elif circle.rank == 3 %}
 {% include 'circle/Relay/Lander/list.html' %}
+
+{% elif circle.rank == 4 and circle.purpose == 1 %}
+{% include 'circle/Relay/Mothership/list.html' %}
 {% endif %}
+
+
 
 
 		{% endblock %}

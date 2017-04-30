@@ -1,46 +1,31 @@
-{% extends 'base.html' %}
+
 {% load widget_tweaks %}
 
-{% block content %}
 
-
-
-
-<br />
-<br /><br />
-<div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="animated slideInUp" >
 
     <form method="post" enctype="multipart/form-data"> 
                       {% csrf_token %}
+
+
+<h4>Choose 4 colors to go with your site</h4>
+
+<br>
                     {% for field in form %}
      
-          {% render_field field class+="hidden" %}<br />
+          {% render_field field %}
 
 {% endfor %}
 
-
-{% if not palette.name %}
-<h4 class="field-label">Give this theme a name</h4>
-          {% render_field form.name class+="field1" placeholder="Theme 1"%}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
+<br /><br />
+ 
 
 <br /><br />
-{% endif %}
 
-{% if palette.name and not palette.accent_color_dark %}
-<h4 class="field-label">What is {{registry.name}}'s main brand color?</h4>
-          {% render_field form.background_color_dark %}<br /><br />
-          <button class="btn btn-default" type="submit">Continue </button>
 
-{% endif %}
-<br /><br />
+
 
 
 
 
 
     </form>
-</div>
-</div>
-{% endblock %}
