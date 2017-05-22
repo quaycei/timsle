@@ -1,54 +1,250 @@
 {% extends 'base.html' %}
-{% load circletags %}
+
 
 {% block content %}
 
+
+
 <style>
-body {background-color: #3F51B5 ;}
-nav {display: none}
 
-.brand-line {
-	width: 20px;
-background-color: white;
-border-radius: 30px;
-display: inline-block;
-margin-left: 8px;
-}
+	body {background-color: #3F51B5; }
 
 
-{% for line in lines %}
-.line-{{forloop.counter}} {
-	height: {{line.height}}px;
-	margin-bottom: {{line.drop}}px;
-	
+	.header-text {
+		margin-top: 50px;
+		font-weight: 300;
 	}
-{% endfor %}
-
-
 </style>
 
 
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
 
-
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-
-<div class="animated fadeOut center " style="animation-delay: 2.3s; margin-top: 150px; position: fixed;">
-	<div class="animated zoomIn">
-<div style="margin-left: 60px;">
-
-{% for line in lines %}
-<div class="brand-line line-{{forloop.counter}} animated fadeInLeft fadeOutRight infinite" style="animation-delay: 0.{{forloop.counter}}s; animation-timing-function: ease-in-out;"></div>
-{% endfor %}
-</div>
+			
+			<div class="modal fade" id="modal-container-179404" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							 
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								×
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								Create a Timsle 
+							</h4>
+						</div>
+						<div class="modal-body" style="height: 500px;">
+							...
+						</div>
+						<div class="modal-footer">
+							 
+							<button type="button" class="btn btn-default" data-dismiss="modal">
+								Close
+							</button> 
+							<button type="button" class="btn btn-explore">
+								Save changes
+							</button>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			
+		</div>
 	</div>
 </div>
 
-{% endblock %}
+
+
+
+<div class="container-fluid animated fadeInDown" style="animation-delay: 0.6s;">
+	<div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
+
+		<div class="header-text">
+			<h1 class="col-white" style="font-size: 6em; opacity: 1;">health</h1>
+			<h2 class="col-white" style="font-weight: 300;">
+				We're building Timsle to help us improve our health, reach our goals, and live better lives.
+			</h2>
+		</div>
+	</div>
+
+
+	<div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
+		<div class="padding-y-50">
+
+
+
+
+
+			<div  class="animated zoomIn" style=" background-color: rgba(255,255,255,1);
+			border-radius: 6px;
+			color: white;
+			padding: 40px;
+			padding-top: 15px;
+			padding-bottom: 0px;
+
+			-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.5);
+			-moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.5);
+			box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.5);
+			animation-delay: 0.8s;">
+			<div class="row">
+
+
+				
+
+
+				<h4 style="margin-left: 10px;" style="font-weight: 500;">
+					<h3 class="inline " style="font-weight: 500; color: rgba(0,0,0,0.4);">Choose an option to get started:</h3></h4>
+
+					<br />
+					<div class="row padding-y-20">
+						<div class="col-sm-4" style="padding: 3px;">
+							<div class="btn-mainpage" style=" color: #212F3D;">
+								<div style="text-align: center;">
+									<i class="material-icons md-4em">important_devices</i>
+								</div><br />
+								<h4>Build a platform for your organization.</h4>
+
+								<a class="btn btn-mainpage-clickable" style="background-color: #7CB342;" id="modal-179404" href="#modal-container-179404" role="button" data-toggle="modal">CREATE</a>
+
+							</div>
+						</div>
+
+
+						
+							<div class="col-sm-4" style="padding: 3px;">
+								<div class="btn-mainpage" style="color: #212F3D;">
+									<div style="text-align: center;">
+										<i class="material-icons md-4em">directions_bike</i>
+									</div><br />
+									<h4>Start working towards your goals.</h4>
+									
+									<div class="btn btn-mainpage-clickable" style="background-color: #29B6F6; ">ACCOMPLISH</div>
+
+								</div>
+							</div>
+
+
+					
+								<div class="col-sm-4" style="padding: 3px;">
+									<div class="btn-mainpage" style=" color: #212F3D;">
+										<div style="text-align: center;">
+											<i class="material-icons md-4em">lightbulb_outline</i>
+										</div><br />
+										<h4>Find out how you can use timsle.</h4>
+
+										<div class="btn btn-mainpage-clickable" style="background-color: #FFA000;">EXPLORE</div>
+
+									</div>
+								</div>
+
+
+
+
+							</div>
+
+
+
+
+
+
+
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+		</div>
+		</div>
+		<div class="container-fluid padding-y-80" style=" z-index: -29999; background-color: #eee; margin-top: -100px;" >
+			<br /><br />
+			<br /><br /><div class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
+			<div class="col-md-8 col-md-offset-2">
+				<h2 style="font-weight: 300;">Our challenge was <b style="color: #3F51B5;">mental health.</b><br>
+					Our solution is <b style="color: #3F51B5;">well-being.</b></h2>
+
+					<br /><br />
+
+					<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fquayce%2Fvideos%2F631019027095780%2F&show_text=0&width=560" width="560" height="315" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+					<br />
+					<br />
+					<br />
+					<h4 style="font-weight: 400; line-height: 1.5em;">We set out in the beginning to build a tool for those among us suffering from mental illnesses. Through our journey, we began to see that the nature of the problem we're working on isn't just mental health - it's <b>health.</b><br /><br /> As we continue to build the Timsle platform, we’re growing it into something for everyone that could use . It might be for someone who wants to eat healthier, improve their study habits, or make new friends. Our commitment is to making the platform as helpful to you as possible, so that anyone,
+						with a mental illness or not, can use Timsle to help them improve their lifestyle. </h4><br />
+						<div class="brick-underline" style="border-radius: 10px; background-color: #3F51B5;" ></div>
+<h4>OUR BEST WISHES - </h4>
+						<h2 class="reenie" style="color: #3f51b5; font-size: 3em;">
+							Quayce & Trevor
+						</h2>
+						
+					</div>
+				</div>
+			</div>
+
+
+			<div class="container-fluid" >
+				<div class="row footer">
+					<div class="container">
+
+						<div class="row">
+
+
+							<div class="main-carousel " data-flickity='{ "cellAlign": "left", "dragThreshold": 30}'>
+
+
+
+
+
+								<div class="animated zoomIn" id="scrollable">
+
+									<div class="footer-panel">
+										<b class="txt-caps">ADDRESS</b><br /><br />
+										<b>Timsle</b><br />
+										123 Slater Street,<br />
+										Ottawa, ON<br />
+										K1P 5H2<br />
+									</div>
+								</div>
+
+								<div class="footer-panel">
+									<b class="txt-caps">ADDRESS</b><br /><br />
+									<b>Timsle</b><br />
+									123 Slater Street,<br />
+									Ottawa, ON<br />
+									K1P 5H2<br />
+								</div>
+
+							</div>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding-y-20 animated slideInUp" style="background-color: black">
+			<div class="container">
+				<div class="col-xs-12 col-md-10 col-md-offset-1">
+					<div class="col-sm-10">
+						<p style="color: rgba(255,255,255,0.5); font-weight: 500;"><b>© 2017. All rights reserved. Powered by Timsle.</b>
+							<br />
+							Timsle is designed to help us improve our health, reach our goals, and live better lives.</p>
+						</div>
+						<div class="btn btn-default" style="background-color: rgba(255,255,255,0.3); opacity: 0.3; float: right; margin-top: 8px;"><b>Explore Timsle</b></div>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+
+
+
+		{% endblock %}
 

@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
+from ordered_model.models import OrderedModel
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericRelation
 from palette.models import Palette, Element
@@ -60,7 +61,7 @@ class Tag(models.Model):
         return self.name 
 
 
-class Circle(models.Model):
+class Circle(OrderedModel):
     group = models.IntegerField(choices=GROUP,null=True, blank=True, default=0)
     registry = models.ForeignKey(Registry, default=None)
     rank = models.IntegerField(choices=RANK_TYPES,default=0)
@@ -76,7 +77,8 @@ class Circle(models.Model):
     tagline = models.CharField(max_length=140, default=None, blank=True, null=True)
     description = models.TextField(max_length=140, null=True, default=None, blank=True)
 
-
+    class Meta(OrderedModel.Meta):
+        pass
 
     def __str__(self):
         return self.name 
