@@ -206,10 +206,6 @@ DEFAULT_FROM_EMAIL = 'team@timsle.co'
 SERVER_EMAIL = 'team@timsle.co'
 
 
-# Ensure EMAIL_BACKEND is set so allauth can proceed to send confirmation emails
-# Set to console for development/testing
-EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
-
 # Custom allauth settings
 # Use email as the primary identifier
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
