@@ -192,18 +192,6 @@ DJSTRIPE_PLANS = {
 
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-
-EMAIL_PORT = 587
-EMAIL_HOST_USER = os.environ['TIMSLE_EMAIL_USER']
-EMAIL_HOST_PASSWORD = os.environ['TIMSLE_EMAIL_PASSWORD']
-
-DEFAULT_FROM_EMAIL = 'team@timsle.co'
-SERVER_EMAIL = 'team@timsle.co'
 
 
 
@@ -211,8 +199,7 @@ SERVER_EMAIL = 'team@timsle.co'
 # Use email as the primary identifier
 ACCOUNT_AUTHENTICATION_METHOD = 'email' 
 ACCOUNT_EMAIL_REQUIRED = True
-# Make email verification mandatory to avoid junk email accounts
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
+
 # Eliminate need to provide username, as it's a very old practice
 ACCOUNT_USERNAME_REQUIRED = False
 
