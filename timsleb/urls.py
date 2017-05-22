@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^payments/', include('djstripe.urls', namespace="djstripe")),
-    url(r'^$', views.menu, name='menu'),
+    url(r'^$', views.start, name='start'),
     url(r'^c/', include('circle.urls')),
     url(r'^r/', include('registry.urls')),
     url(r'^p/', include('pact.urls')),

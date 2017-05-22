@@ -1,0 +1,12 @@
+*.pyc
+*.pyo
+.project
+.pydevproject
+venv
+staticfiles
+.DS_Store
+projects/.DS_Store
+timsle/.DS_Store
+bootstrap-compass/.sass-cache/
+.settings/
+.sass-cache/**
