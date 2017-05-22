@@ -199,11 +199,12 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'team@timsle.co'
-EMAIL_HOST_PASSWORD = '3ERw4%er8790'
+EMAIL_HOST_USER = os.environ['TIMSLE_EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['TIMSLE_EMAIL_PASSWORD']
 
 DEFAULT_FROM_EMAIL = 'team@timsle.co'
 SERVER_EMAIL = 'team@timsle.co'
+
 
 
 # Custom allauth settings
