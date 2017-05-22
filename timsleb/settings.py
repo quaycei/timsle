@@ -156,9 +156,10 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_SESSION_REMEMBER = True
 LOGIN_REDIRECT_URL = 'circle_menu'
 ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
 
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 
 
@@ -187,3 +188,25 @@ DJSTRIPE_PLANS = {
         "interval": "year"
     }
 }
+
+
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
+if not DEBUG:
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'team@timsle.co'
+    EMAIL_HOST_PASSWORD = '3ERw4%er8790'
+
+DEFAULT_FROM_EMAIL = 'team@timsle.co'
+SERVER_EMAIL = 'team@timsle.co'
+
+ACCOUNT_EMAIL_UNIQUE = True
+ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
