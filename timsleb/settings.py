@@ -48,10 +48,6 @@ INSTALLED_APPS = [
     'registry',
     'circle',
     'pact',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
     'ordered_model',
 ]
 
@@ -148,21 +144,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
-ACCOUNT_PRESERVE_USERNAME_CASING = False
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
-ACCOUNT_USERNAME_MIN_LENGTH = 3
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_SESSION_REMEMBER = True
-LOGIN_REDIRECT_URL = 'circle_menu'
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_CONFIRM_EMAIL_ON_GET = True
-
-
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_USERNAME_REQUIRED = False
-
 
 SITE_ID = 1
 
@@ -196,20 +177,8 @@ DJSTRIPE_PLANS = {
 
 
 
-# Custom allauth settings
-# Use email as the primary identifier
-ACCOUNT_AUTHENTICATION_METHOD = 'email' 
-ACCOUNT_EMAIL_REQUIRED = True
-# Make email verification mandatory to avoid junk email accounts
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory' 
-# Eliminate need to provide username, as it's a very old practice
-ACCOUNT_USERNAME_REQUIRED = False
-
-# Add the 'allauth' backend to AUTHENTICATION_BACKEND and do not remove ModelBackend
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin and to ensure compatibility with other packages
     'django.contrib.auth.backends.ModelBackend',
-    # 'allauth' specific authentication methods
-    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
