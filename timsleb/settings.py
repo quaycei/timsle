@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'timsleb.wsgi.application'
 
 
 DATABASES =  {'default' : dj_database_url.config(
-                default='postgres://uheevssuwxvefl:33648d4bf8c96f3817eb5b3a486df711b2a3634f0fe99fc75a558c964158624c@ec2-54-235-177-45.compute-1.amazonaws.com:5432/dbd5hf6qkau82e')}
+                default='postgres://kmlkxahgjvzxya:1d6af881ee52c36ec88c82d3d584227b3be0efe18ae8fcaa779b769ec6159966@ec2-54-83-26-65.compute-1.amazonaws.com:5432/ddn8p0dc3rho8o')}
 
 
 # Enable Connection Pooling
