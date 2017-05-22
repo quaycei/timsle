@@ -2,7 +2,6 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from allauth.account.models import EmailAddress
 
 from circle.models import Circle, Project, Content, Guideline
 

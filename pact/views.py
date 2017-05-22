@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponseForbidden
 from django.contrib import messages
-from allauth.account.decorators import verified_email_required
 
 from circle.models import Project, Content
 from pact.models import Pact, Buddy, Checkin
@@ -9,7 +8,7 @@ from pact.forms import PactForm, BuddyRequestForm, BuddyStatusForm
 
 
 
-@verified_email_required
+
 def pact_list(request):
     buddy_requests = Buddy.objects.filter(user=request.user).filter(status=1)
     my_pacts = request.user.pact_set.all().filter(status=1)
@@ -25,7 +24,7 @@ def pact_list(request):
         })
 
 
-@verified_email_required
+
 def pact_read(request, pact_id):
     pact = Pact.objects.get(id=pact_id)
     checkins = pact.checkin_set.all()
@@ -38,7 +37,7 @@ def pact_read(request, pact_id):
 
 
 
-@verified_email_required
+
 def buddy_create(request, pact_id):
     pact = Pact.objects.get(id=pact_id)
     buddyform = BuddyRequestForm()
@@ -62,7 +61,7 @@ def buddy_create(request, pact_id):
         })
 
     
-@verified_email_required
+
 def buddy_status(request, buddy_id):
     buddy = Buddy.objects.get(id=buddy_id)
     buddyform = BuddyStatusForm(request.POST or None, instance=buddy)
@@ -81,7 +80,7 @@ def buddy_status(request, buddy_id):
 
 
 
-@verified_email_required
+
 def pact_checkin(request, pact_id):
     pact = Pact.objects.get(id=pact_id)
     

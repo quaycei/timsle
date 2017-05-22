@@ -2,7 +2,6 @@ from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
-from allauth.account.decorators import verified_email_required
 from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from pact.models import Pact, Buddy, Checkin
@@ -10,7 +9,7 @@ from circle.forms import CircleForm, CircleStartForm, ProjectForm, LinkForm
 from registry import views
 
 
-@verified_email_required
+
 def circle_menu(request):
     buddy_requests = Buddy.objects.filter(user=request.user).filter(status=1)
     my_pacts = request.user.pact_set.all().filter(status=1)
@@ -69,7 +68,7 @@ def content_read(request, project_id, content_id):
 		})
 
 
-@verified_email_required
+
 def project_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	projectform = ProjectForm()
@@ -91,7 +90,7 @@ def project_create(request, registry_id):
 	return render(request, 'project/update.html', {'form': projectform})
 
 
-@verified_email_required
+
 def project_update(request, project_id):
 	project = Project.objects.get(id=project_id)
 	projectform = ProjectForm(instance=project)
@@ -109,7 +108,7 @@ def project_update(request, project_id):
 		'form': projectform,
 		})
 
-@verified_email_required
+
 def circle_create_user(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
@@ -143,7 +142,7 @@ def circle_create_user(request, registry_id):
 	})
 
 
-@verified_email_required
+
 def circle_create_offering(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
@@ -178,7 +177,7 @@ def circle_create_offering(request, registry_id):
 	})
 
 
-@verified_email_required
+
 def circle_create_filter(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	filters = registry.circle_set.all().filter(group=3).order_by('-created_at')
@@ -212,7 +211,6 @@ def circle_create_filter(request, registry_id):
 	})
 
 
-@verified_email_required
 def circle_create_need(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	circles = registry.circle_set.all()
@@ -246,7 +244,7 @@ def circle_create_need(request, registry_id):
 
 
 
-@verified_email_required
+
 def circle_create_types(request, registry_id, circle_id):
 	registry = Registry.objects.get(id=registry_id)
 	circles = registry.circle_set.all()
@@ -287,7 +285,7 @@ def circle_create_types(request, registry_id, circle_id):
 
 
 
-@verified_email_required
+
 def circle_update(request, circle_id):
 	circle = Circle.objects.get(id=circle_id)
 	circleform = CircleForm(instance=circle)
@@ -307,7 +305,7 @@ def circle_update(request, circle_id):
 
 
 
-@verified_email_required
+
 def link_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	linkform = LinkForm()
@@ -337,7 +335,7 @@ def link_create(request, registry_id):
 
 
 
-@verified_email_required
+
 def link_update(request, link_id):
 	link = Link.objects.get(id=link_id)
 	linkform = LinkForm(instance=link)

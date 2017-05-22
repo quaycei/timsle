@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
-from allauth.account.decorators import verified_email_required
+
 from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from registry.forms import RegistryForm, RegistryStartForm, ContactForm
@@ -10,7 +10,6 @@ from palette.models import Palette
 
 
 
-@verified_email_required
 def registry_list(request):
 	my_registrys = Registry.objects.filter(creator=request.user)
 
@@ -18,7 +17,7 @@ def registry_list(request):
 		'my_registrys':my_registrys,
 		})
 
-@verified_email_required
+
 def registry_create(request):
 	registrystartform = RegistryStartForm()
 
@@ -36,7 +35,6 @@ def registry_create(request):
 	return render(request, 'registry/create.html', {'form': registrystartform})
 
 
-@verified_email_required
 def registry_update(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	registryform = RegistryForm(instance=registry)
@@ -76,7 +74,6 @@ def registry_dashboard(request, registry_id):
 
 
 
-@verified_email_required
 def contact_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	contactform = ContactForm()
@@ -95,7 +92,6 @@ def contact_create(request, registry_id):
 	return render(request, 'contact/update.html', {'form': contactform})
 
 
-@verified_email_required
 def contact_update(request, contact_id):
 	contact = Contact.objects.get(id=contact_id)
 	contactform = ContactForm(instance=contact)
@@ -113,7 +109,6 @@ def contact_update(request, contact_id):
 		'form': contactform,
 		})
 
-@verified_email_required
 def contact_read(request, contact_id):
 	contact = Contact.objects.get(id=contact_id)
 

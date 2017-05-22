@@ -2,13 +2,12 @@ from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
-from allauth.account.decorators import verified_email_required
 from registry.models import Registry
 from palette.forms import PaletteStartForm, PaletteForm
 from palette.models import Palette
 
 
-@verified_email_required
+
 def palette_create(request, registry_id):
 	registry = Registry.objects.get(id=registry_id)
 	palettestartform = PaletteStartForm()
@@ -28,7 +27,7 @@ def palette_create(request, registry_id):
 	return render(request, 'palette/update.html', {'form': palettestartform})
 
 
-@verified_email_required
+
 def palette_update(request, palette_id):
 	palette = Palette.objects.get(id=palette_id)
 	paletteform = PaletteForm(instance=palette)
@@ -46,7 +45,7 @@ def palette_update(request, palette_id):
 		'form': paletteform,
 		})
 
-@verified_email_required
+
 def palette_read(request, palette_id):
 	palette = Palette.objects.get(id=palette_id)
 
