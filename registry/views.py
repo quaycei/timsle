@@ -33,7 +33,7 @@ def registry_create(request):
                 
 			return redirect('registry_update', registry_id=registry.id)
     
-	return render(request, 'registry/create.html', {'form': registrystartform, 'the_palette':the_palette})
+	return render(request, 'registry/create.html', {'form': registrystartform})
 
 
 @verified_email_required
