@@ -20,7 +20,11 @@
 <div id="pt-main" class="pt-perspective">
 	<div class="pt-page pt-page-1">
 		
-
+<div class="animated zoomOut center " style="animation-delay: 1.3s; margin-top: 100px; margin-left: 50px;position: fixed;">
+	<div class="animated zoomIn">
+		<i class="col-white material-icons fa-spin center" style="font-size: 8em;">blur_on</i>
+	</div>
+</div>
 
 
 <div class="container-fluid">
@@ -37,20 +41,21 @@
 								×
 							</button>
 							<h4 class="modal-title" id="myModalLabel">
-								Create a Timsle 
+								Introduction to Timsle <b>Maker</b>
 							</h4>
 						</div>
 						<div class="modal-body" style="height: 500px;">
-							...
+							
+							<b> Create an account </b><br />
+							Before you begin making a platform on Timsle, you'll need to create an account. Timsle uses popular social networks to create accounts, however, no information is shared with them.
 						</div>
 						<div class="modal-footer">
 							 
 							<button type="button" class="btn btn-default" data-dismiss="modal">
 								Close
 							</button> 
-							<button type="button" class="btn btn-explore">
-								Save changes
-							</button>
+							<a href="{% url 'registry_create' %}" class="btn btn-mainpage-clickable" style="background-color: #7CB342; ">BEGIN
+							</a>
 						</div>
 					</div>
 					
@@ -111,7 +116,7 @@
 								<div style="text-align: center;">
 									<i class="material-icons md-4em">important_devices</i>
 								</div><br />
-								<h4>Build a platform for your organization.</h4>
+								<h4>Make a platform for your organization.</h4>
 
 								<a class="btn btn-mainpage-clickable" style="background-color: #7CB342;" id="modal-179404" href="#modal-container-179404" role="button" data-toggle="modal">CREATE</a>
 

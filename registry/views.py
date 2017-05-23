@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404, reverse
 from django.contrib import messages
 from django.http import HttpResponseForbidden
 from django.core.urlresolvers import reverse
-
+from django.contrib.auth.decorators import login_required
 from circle.models import Circle, Link, Project, Content, Guideline
 from registry.models import Registry, Contact
 from registry.forms import RegistryForm, RegistryStartForm, ContactForm
@@ -17,7 +17,7 @@ def registry_list(request):
 		'my_registrys':my_registrys,
 		})
 
-
+@login_required
 def registry_create(request):
 	registrystartform = RegistryStartForm()
 
