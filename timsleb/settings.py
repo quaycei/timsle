@@ -183,6 +183,7 @@ DJSTRIPE_PLANS = {
 ACCOUNT_EMAIL_VERIFICATION = None
 # Eliminate need to provide username, as it's a very old practice
 ACCOUNT_USERNAME_REQUIRED = False
+LOGIN_REDIRECT_URL = 'circle_menu'
 
 # Add the 'allauth' backend to AUTHENTICATION_BACKEND and do not remove ModelBackend
 AUTHENTICATION_BACKENDS = (
