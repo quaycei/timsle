@@ -95,7 +95,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 <h4 style="font-weight: 300;">If you have a Timsle account, sign in here:</h4>
 <form class="login" method="POST" action="{% url 'account_login' %}">
  
-
+{% csrf_token %}
          <input type="email" placeholder="Email" name="email" class="loginform">
         <input type="password" placeholder="Password" name="password" class="loginform">
 
