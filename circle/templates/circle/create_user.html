@@ -4,98 +4,115 @@
 {% block content %}
 
 <style>
-body { 
-background-color: white;
-}
-nav {display: none;}
+  body { 
+    background-color: white;
+  }
+  nav {display: none;}
 </style>
+
+<!-- GROUPS
+1: Users
+2: 
+3:
+4:
+5:
+6: 
+-->
+
 
 
 <br />
 <br /><br />
 <div class="col-xs-12 col-md-8 col-md-offset-2 col-sm-offset-1 col-sm-10">
-<div class="form-holder animated" >
-<div class="row" style="padding: 20px;">
+  <div class="form-holder animated" >
+    <div class="row" style="padding: 20px;">
 
-<div class="col-xs-12">
-<h1 style="font-weight: 200; display: inline-block;" >Users</h1>
-<a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
-</div>
+      <div class="col-xs-12">
 
-
-    <form method="post" enctype="multipart/form-data"> 
-                      {% csrf_token %}
-
-    {{ form.non_field_errors }}
-    {{form.name.errors }}
-
-  
+        <!-- TITLE --> 
+    
+        <a href="{% url 'registry_dashboard' registry_id=registry.id %}" class="col-black"><i class="material-icons md-2em" style="text-align: right; float: right; display: inline-block;">close</i></a>
+      </div>
 
 
-          <div class="col-md-8" style="padding: 0;">
+
+
+      <form method="post" enctype="multipart/form-data"> 
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+        {{form.name.errors }}
+
+
+
+
+        <div class="col-md-8" style="padding: 0;">
           <div class="linesform" >
-{% if parent_circle %}
-<h4 class="field-label">Are there specific groups of <div class="tag" style="padding: 5px;"><b>{{parent_circle.name}}</b></div> that may have different needs?</h4>
-{% else %}
-<h4 class="field-label">Add each group of people that will access your site.</h4><br />
+
+            <h4 class="field-label">
+          {% if circle_group == '0' %} Add each group of people that may access {{ registry.name}}.
+          {% elif circle_group == '1' %} Add each group of people that may access {{ registry.name}}.
+          {% elif circle_group == '2' %} Needs
+          {% elif circle_group == '3' %} Filters
+          {% elif circle_group == '4' %} In general, what might people want to accomplish by coming to the {{registry.name}} website?
+          {% endif %}
+            </h4><br />
+
+            <div class="row">
+              <div class="col-md-8 col-sm-12">
+                <div class="input-group input-group-lg">
+                  {% render_field form.name class+="form-control" placeholder="Students"%}
+                  <span class="input-group-btn">
+                    <button class="btn bg-theme" type="submit">
+                     <i class="material-icons col-white" style="display: inline-block; ">add</i></button>
+                   </span>
+                 </div><!-- /input-group -->
+               </div>
+             </div>
 
 
 
+             {% if not users %}
+             <br><br>
+             <b>For example</b><br>
+             {% for guideline in example_users %}
+             <div class="tag bg-theme"><b>{{guideline.text}}</b></div>
+             {% endfor %}
+             {% endif %}
 
 
-{% endif %}
-<div class="row">
-<div class="col-md-8 col-sm-12">
-    <div class="input-group input-group-lg">
-      {% render_field form.name class+="form-control" placeholder="Students"%}
-      <span class="input-group-btn">
-        <button class="btn " type="submit" style="background-color: {{registry.palette.accent_color_dark}};">
-        	<i class="material-icons col-white" style="display: inline-block; ">add</i></button>
-      </span>
-    </div><!-- /input-group -->
-</div>
-</div>
+           </div>
+         </div>
+         <br /><br /><br>
+         <div class="row">
+          <div class="col-xs-12">
+            <div class="col-xs-12">
+              <br>
+              {% if users %}<h5>You've added these groups: </h5>{% endif %}
 
-  {% if not users %}
-  <br><br>
-<b>For example</b><br>
-{% for guideline in example_users %}
-<div class="tag"><b>{{guideline.text}}</b></div>
-{% endfor %}
-{% endif %}
+              {% for circle in users %}
 
+              <div class="btn-group" style="margin:3px; ">
+                <a href="{% url 'circle_list' circle_id=circle.id %}" class="btn bg-theme" style="padding-top: 2px; padding-bottom:2px; color: white;  height: 40px;"><h5>{{circle.name}}</h5></a>
+                <a href="{% url 'circle_update' circle_id=circle.id %}" class="btn bg-theme" style="padding-top: 2px; padding-bottom:2px; color: white;  height: 40px; border-left: 1px solid rgba(255,255,255,0.5)"><i class="col-white material-icons" style="padding-top: 5px; color: rgba(255,255,255,0.5)">mode_edit</i></a>
+              </div>
+              {% endfor %}
 
-</div>
-</div>
-<br /><br /><br>
-<div class="row">
-<div class="col-xs-12">
-<div class="col-xs-12">
-<br>
-{% if users %}<h5>You've added these groups: </h5>{% endif %}
-
-{% for circle in users %}
-
-<div class="btn-group" style="margin:3px; ">
-<a href="{% url 'circle_list' circle_id=circle.id %}" class="btn" style="padding-top: 2px; padding-bottom:2px; color: white;  background-color: {{registry.palette.accent_color_dark}};height: 40px;"><h5>{{circle.name}}</h5></a>
-<a href="{% url 'circle_update' circle_id=circle.id %}" class="btn" style="padding-top: 2px; padding-bottom:2px; color: white;  background-color: {{registry.palette.accent_color_dark}}; height: 40px; border-left: 1px solid rgba(255,255,255,0.5)"><i class="col-white material-icons" style="padding-top: 5px; color: rgba(255,255,255,0.5)">mode_edit</i></a>
-</div>
-{% endfor %}
-
-</div>
-<br /><br />
+            </div>
+            <br /><br />
 
 
-</div>
-</div>
+          </div>
+        </div>
 
 
-    </form>
-    <br />    <br />    <br />
-    <div class="col-xs-12">
-<a class="btn-continue" href="{% url 'circle_create_offering' registry_id=registry.id %}">Continue </a>
-</div>
+      </form>
+      <br />    <br />    <br />
+      <div class="col-xs-12">
+        <a class="btn-continue bg-theme" href="">Continue </a>
+      </div>
 
-</div>
-</div>
-{% endblock %}
+    </div>
+  </div>
+
+  {% endblock %}

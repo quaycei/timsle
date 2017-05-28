@@ -109,7 +109,7 @@ def project_update(request, project_id):
 		})
 
 
-def circle_create_user(request, registry_id):
+def circle_create(request, registry_id, circle_group):
 	registry = Registry.objects.get(id=registry_id)
 	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
 	circlestartform = CircleStartForm()
@@ -119,15 +119,15 @@ def circle_create_user(request, registry_id):
 		circlestartform = CircleStartForm(request.POST)
 		if circlestartform.is_valid():
 			circle = circlestartform.save(commit=False)
-			circle.group = 0
+			circle.group = circle_group
 			circle.creator = request.user
 			circle.registry = registry
 			circle.palette = registry.palette
 			circle.verification = registry.verification
 			circle.save()
 			messages.success(request, 'You created a new circle')
-			return redirect('circle_create_user', 
-				registry_id=registry.id
+			return redirect('circle_create', 
+				registry_id=registry.id, circle_group=circle.group
 				)
                 
 	else:
@@ -139,42 +139,10 @@ def circle_create_user(request, registry_id):
 		'form': circlestartform,
 		'users': users,
 		'example_users':example_users,
+		'circle_group': circle_group,
 	})
 
 
-
-def circle_create_offering(request, registry_id):
-	registry = Registry.objects.get(id=registry_id)
-	users = registry.circle_set.all().filter(group=0).order_by('-created_at')
-	offerings = registry.circle_set.all().filter(group=1).order_by('-created_at')
-	example_offerings = Guideline.objects.filter(purpose=2).filter(type_of_guideline=0)
-	circlestartform = CircleStartForm()
-
-	if request.method == 'POST':
-		circlestartform = CircleStartForm(request.POST)
-		if circlestartform.is_valid():
-			circle = circlestartform.save(commit=False)
-			circle.group = 1
-			circle.creator = request.user
-			circle.registry = registry
-			circle.palette = registry.palette
-			circle.verification = registry.verification
-			circle.save()
-			messages.success(request, 'You created a new circle')
-			return redirect('circle_create_offering', 
-				registry_id=registry.id,
-				)
-                
-	else:
-		circlestartform = CircleStartForm()
-
-    
-	return render(request, 'circle/create_offering.html', {
-		'registry':registry,
-		'form': circlestartform,
-		'offerings':offerings,
-		'example_offerings':example_offerings,
-	})
 
 
 
@@ -208,37 +176,6 @@ def circle_create_filter(request, registry_id):
 		'form': circlestartform,
 		'filters':filters,
 		'example_offerings':example_offerings,
-	})
-
-
-def circle_create_need(request, registry_id):
-	registry = Registry.objects.get(id=registry_id)
-	circles = registry.circle_set.all()
-	circlestartform = CircleStartForm()
-
-	if request.method == 'POST':
-		circlestartform = CircleStartForm(request.POST)
-		if circlestartform.is_valid():
-			circle = circlestartform.save(commit=False)
-			circle.creator = request.user
-			circle.registry = registry
-			circle.palette = registry.palette
-			circle.verification = registry.verification
-			circle.save()
-			messages.success(request, 'You created a new circle')
-			return redirect('circle_create_need', 
-				registry_id=registry.id,
-				circle_id=circle.id,
-				)
-                
-	else:
-		circlestartform = CircleStartForm()
-
-    
-	return render(request, 'circle/create.html', {
-		'registry':registry,
-		'form': circlestartform,
-		'circles':circles,
 	})
 
 

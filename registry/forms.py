@@ -7,7 +7,7 @@ from registry.models import Registry, Contact
 class RegistryStartForm(forms.ModelForm):
 	class Meta:
 		model = Registry
-		exclude = ['creator', 'created_at', 'verification', 'status', 'mission', 'mission_why', 'palette',]
+		exclude = ['creator', 'created_at', 'verification', 'status', 'mission', 'mission_why', 'palette', 'theme_color']
 
 
 

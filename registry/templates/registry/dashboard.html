@@ -100,7 +100,7 @@ There are no circles associated with this registry yet.
 {% endfor %}
 </div>
 <br />
-<a href="{% url 'circle_create_user' registry_id=registry.id %}" class="btn btn-default">Create a Circle</a>
+<a href="{% url 'circle_create' registry_id=registry.id circle_group=0 %}" class="btn btn-default">Create a Circle</a>
 
 
 					</div>

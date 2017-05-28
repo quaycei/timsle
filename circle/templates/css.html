@@ -673,16 +673,15 @@ padding: 10px;
 	border-radius: 3px;
 	margin: 3px;
 	display: inline-block;
-	background-color: #3f51b5;
-	background-color: {{registry.palette.accent_color_dark}};
+	font-weight: 700;
 }
 .hidden {display: none;}
 .fade {background-color: rgba(0,0,0,0.6);}
 
-.field-label {line-height: 1.5em;}
+.field-label {line-height: 1.8em;}
 
 .btn-continue {
-	background-color: #3f51b5;background-color: {{registry.palette.background_color}};
+	
 font-weight: 700; color: white; border-radius: 4px; padding: 10px;
 padding-left: 15px; padding-right: 15px; }
 
@@ -715,4 +714,20 @@ padding-left: 20px; padding-right: 20px;"
 }
 
 
+.bg-theme {
+	background-color: #3f51b5;
+	background-color: {{registry.theme_color}};
+}
+
+
+.col-theme {
+	color: #3f51b5;
+	color: {{registry.theme_color}};
+}
+
+.field_color {
+	width: 50px; height: 50px;
+	 border: 0;
+	border-radius: 3px;
+}
 </style>

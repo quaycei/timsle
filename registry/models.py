@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import validate_slug
 from django.contrib.contenttypes.fields import GenericRelation
-
+from colorful.fields import RGBColorField
 
 
 
@@ -25,6 +25,10 @@ VERIFICATION = (
         (3, 'Declined'),
     )
 
+BOOLEAN = (
+        (0, 'No'),
+        (1, 'Yes'),
+    )
 
 
 
@@ -37,6 +41,8 @@ class Registry(models.Model):
     mission = models.TextField(max_length=250, default=None, blank=True, null=True)
     mission_why = models.TextField(max_length=250, default=None, blank=True, null=True)
     palette = models.ForeignKey('palette.Palette', blank=True, null=True, default=None)
+    theme_color = RGBColorField(blank=True, null=True, default=None)
+
 
 
     

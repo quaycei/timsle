@@ -25,6 +25,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
       box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.2);
       padding-top: 50px; padding-bottom: 100px;
       border-bottom: 8px solid #3F51B5;
+      border-bottom: 8px solid {{registry.theme_color}}
 
 
 }
@@ -55,25 +56,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 {% if not registry.name %}
 <h4 class="field-label">What is the name of your organization?</h4>
           {% render_field form.name class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-continue" type="submit">Continue </button>
+          <button class="btn btn-continue bg-theme" type="submit">Continue </button>
 
 <br /><br />
 {% endif %}
 
-{% if registry.name and not registry.mission %}
-<h4 class="field-label">The purpose of <div class="tag"><b>{{registry.name}}</b></div> is to:</h4>
+{% if registry.name and not registry.theme_color %}
+<h4 class="field-label">Choose a theme color for <div class="tag bg-theme"><b>{{registry.name}}</b></div></h4>
+<p>Click the color to change it:</p>
+          {% render_field form.theme_color class+="field_color" %}<br /><br />
+          <button class="btn btn-continue bg-theme" type="submit">Continue </button>
+
+
+<br /><br />
+{% endif %}
+
+
+{% if registry.theme_color and not registry.mission %}
+<h4 class="field-label">The purpose of <div class="tag bg-theme"><b>{{registry.name}}</b></div> is to:</h4>
           {% render_field form.mission class+="field1" placeholder="help people improve their health, reach their goals, and live better lives."%}<br /><br />
-          <button class="btn btn-continue" type="submit">Continue </button>
+          <button class="btn btn-continue bg-theme" type="submit">Continue </button>
 
 
 <br /><br />
 {% endif %}
+
+
 
 {% if registry.mission and not registry.mission_why %}
 
-<h4 class="field-label">Why does <div class="tag"><b>{{registry.name}}</b></div> <div class="tag"><b>{{registry.mission}}</b></div> ?</h4>
-          {% render_field form.mission_why class+="field1" placeholder="Timsle Foundation"%}<br /><br />
-          <button class="btn btn-continue" type="submit">Continue </button>
+<h4 class="field-label">Why does <div class="tag bg-theme"><b>{{registry.name}}</b></div> <div class="tag bg-theme"><b>{{registry.mission}}?</b></div></h4>
+          {% render_field form.mission_why class+="field1" placeholder="We believe in the importance of healthy, active lifestyles."%}<br /><br />
+          <button class="btn btn-continue bg-theme" type="submit">Continue </button>
 
 {% endif %}
 
@@ -88,39 +102,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 
 <div class="col-md-6">
-<div style="padding: 30px; padding-top: 50px; border-right: 2px solid #e1e1e1; background-color: white;">
-<p class="txt-caps"><b>Organization</b></p>
-<h1 style="font-weight: 300">{{ registry.name }}</h1><br>
+<p class="txt-caps"><b>Summary</b></p>
+<h4 class="field-label"><div class="tag bg-theme"><b>{{registry.name}}</b></div> is a platform made to<div class="tag bg-theme"><b>{{registry.mission}}</b></div> We do this because <div class="tag bg-theme"><b>{{registry.mission_why}}</b></div></h4>
 
-{% if registry.mission %}<p class="txt-caps"><b>Purpose</b></p>
-<h3 style="font-weight: 200;">{{ registry.mission }}</h3>{% endif %}
-{% if registry.mission_why %}<br><p class="txt-caps"><b>Mission</b></p>
-<h5 style="font-weight: 200;">{{ registry.mission_why }}
-</h5>{% endif %}
-<br>
-<br>
 
 <div class="verification-{{registry.verification}} inline"></div>
 <br /><br /><br />
-</div>
-</div>
-<div class="col-md-6">
-
-<br><br><br>
-<div class="center animated zoomIn" style="animation-delay: 0.4s; color: #4CAF50; ">
-<i class="material-icons" style="font-size: 6em;">check_circle</i>
-<h4>Success!</h4>
-</div>
-<div class="center">
-<br><br>
-
-
-
-{% palette_create registry_id=registry.id %}
-
-<a href="{% url 'circle_create_user' registry_id=registry.id %}" class="btn" style="border-radius: 2px; padding: 10px; color: white; background-color: {{registry.palette.background_color}}"><b>Continue</b></a>
 
 </div>
+
+
+
+
+
+
+<a href="{% url 'circle_create_user' registry_id=registry.id %}" class="btn bg-theme" style="border-radius: 2px; padding: 10px; color: white;"><b>Continue</b></a>
+
+
 </div>
 </div>
 </div>

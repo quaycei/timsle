@@ -19,6 +19,7 @@ from django.views.generic import TemplateView
 from timsleb import views
 
 urlpatterns = [
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^payments/', include('djstripe.urls', namespace="djstripe")),
